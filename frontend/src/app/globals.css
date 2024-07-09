@@ -31,3 +31,21 @@ body {
     text-wrap: balance;
   }
 }
+.hero {
+  background-color: #171a29;
+  padding: 80px 0; 
+}
+
+.hero h1 {
+  color: #fff;
+}
+
+.hero p {
+  color: #ddd;
+  line-height: 1.5;
+}
+
+.hero img {
+  max-width: 500 px;
+  height: auto;
+}
