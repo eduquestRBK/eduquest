@@ -9,7 +9,6 @@ import { faEyeSlash} from '@fortawesome/free-solid-svg-icons'
 import { faEnvelope} from '@fortawesome/free-solid-svg-icons'
 import { faMobileScreenButton } from '@fortawesome/free-solid-svg-icons'
 import {useState} from "react";
-import  NavBar from '../component/Navbar'
 
 
 
