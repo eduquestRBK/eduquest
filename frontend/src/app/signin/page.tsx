@@ -1,9 +1,8 @@
 import Image from "next/image"
-import signinPhoto from "frontend\src\image\make-a-logo-online.png"
-export default function RootLayout(){
+import signinPhoto from "../../image/make-a-logo-online.png"
+export default function signin(){
  
     return (
-     
      <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="flex bg-white shadow-lg rounded-lg overflow-hidden">
         <div className="w-1/2 p-8">
