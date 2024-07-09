@@ -46,6 +46,6 @@ body {
 }
 
 .hero img {
-  max-width: 500 px;
-  height: auto;
+ width: 400px;
+ height: 400px;
 }
