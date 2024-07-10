@@ -1,53 +1,69 @@
 import React from 'react';
+import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserGraduate, faChalkboardTeacher } from '@fortawesome/free-solid-svg-icons';
 import { faLightbulb } from '@fortawesome/free-regular-svg-icons';
 
 const About: React.FC = () => {
   return (
-    <section className="py-8 sm:py-12 bg-white">
+    <section className="py-12 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-3xl sm:text-4xl font-bold text-center text-gray-800 mb-6 sm:mb-8">About Us</h1>
+        <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">About Us</h1>
 
-        <div className="text-center mb-8 sm:mb-12">
-          <p className="text-base sm:text-lg text-gray-700 mb-3 sm:mb-4">
+        <div className="text-center mb-12">
+          <p className="text-lg text-gray-700 mb-4">
             EduQuest is an online learning community with thousands of classes in design, business, tech, and more.
           </p>
-          <p className="text-base sm:text-lg text-gray-700 mb-3 sm:mb-4">
+          <p className="text-lg text-gray-700 mb-4">
             Anyone can join the millions of members in our community to learn cutting-edge skills, network with peers, and discover new opportunities.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-10 sm:mb-12">
-          <div className="flex flex-col items-center bg-gray-100 rounded-lg p-4 sm:p-6">
-            <FontAwesomeIcon icon={faUserGraduate} className="text-lg sm:text-2xl text-primary" />
-            <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mt-3 sm:mt-4 mb-2">Students</h3>
-            <p className="text-sm sm:text-base text-gray-700 text-center">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae dui dolor.
-            </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+          <div className="relative w-full h-64">
+            <Image 
+              src="/images/about-image.jpg" // replace with your image path
+              alt="About us image"
+              layout="fill"
+              objectFit="cover"
+              className="rounded-lg shadow-lg"
+            />
           </div>
-          <div className="flex flex-col items-center bg-gray-100 rounded-lg p-4 sm:p-6">
-            <FontAwesomeIcon icon={faChalkboardTeacher} className="text-lg sm:text-2xl text-primary" />
-            <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mt-3 sm:mt-4 mb-2">Teachers</h3>
-            <p className="text-sm sm:text-base text-gray-700 text-center">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae dui dolor.
+          <div>
+            <h2 className="text-3xl font-semibold text-gray-800 mb-4">Our Mission</h2>
+            <p className="text-lg text-gray-700 mb-4">
+              Our mission is to provide a platform where creativity and inspiration come together. We aim to empower individuals to achieve their personal and professional goals through learning.
             </p>
-          </div>
-          <div className="flex flex-col items-center bg-gray-100 rounded-lg p-4 sm:p-6">
-            <FontAwesomeIcon icon={faLightbulb} className="text-lg sm:text-2xl text-primary" />
-            <h3 className="text-lg sm:text-xl font-semibold text-gray-800 mt-3 sm:mt-4 mb-2">Ideas</h3>
-            <p className="text-sm sm:text-base text-gray-700 text-center">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae dui dolor.
+            <p className="text-lg text-gray-700 mb-4">
+              At EduQuest, we believe that learning is a lifelong journey. Join us and unleash your creativity.
             </p>
           </div>
         </div>
 
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-semibold text-gray-800 mb-4">At EduQuest, We Empower:</h2>
+          <div className="flex items-center justify-center space-x-6 mt-4">
+            <div className="flex items-center">
+              <FontAwesomeIcon icon={faUserGraduate} className="text-4xl text-primary" />
+              <span className="ml-2 text-xl text-gray-800">Students</span>
+            </div>
+            <div className="flex items-center">
+              <FontAwesomeIcon icon={faChalkboardTeacher} className="text-4xl text-primary" />
+              <span className="ml-2 text-xl text-gray-800">Teachers</span>
+            </div>
+            <div className="flex items-center">
+              <FontAwesomeIcon icon={faLightbulb} className="text-4xl text-primary" />
+              <span className="ml-2 text-xl text-gray-800">Ideas</span>
+            </div>
+          </div>
+        </div>
+
         <div className="text-center">
-          <h2 className="text-2xl sm:text-3xl font-semibold text-gray-800 mb-3 sm:mb-4">Join Our Community</h2>
-          <p className="text-base sm:text-lg text-gray-700 mb-3 sm:mb-4">
+          <h2 className="text-3xl font-semibold text-gray-800 mb-4">Join Our Community</h2>
+          <p className="text-lg text-gray-700 mb-4">
             Become a part of our vibrant community and start your learning journey today. Connect with like-minded individuals, share your work, and get inspired.
           </p>
-          <p className="text-base sm:text-lg text-gray-700 mb-3 sm:mb-4">
+          <p className="text-lg text-gray-700 mb-4">
             At EduQuest, we strive to create a supportive and inclusive environment where everyone can thrive.
           </p>
         </div>
