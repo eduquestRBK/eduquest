@@ -12,6 +12,10 @@ import {useState} from "react";
 import Link from "next/link";
 import axios from "axios"
 import { useRouter } from 'next/navigation'
+import Navbar from "../component/Navbar";
+import Footer from '../component/Footer'
+
+
 
 const page = () => {
   const [showPassword,setShowPassword]=useState(false)
@@ -50,6 +54,8 @@ const page = () => {
   }
 
   return (
+<div className="">
+  <Navbar/>
     <div className="container-signup flex items-center justify-center">
 <div className="signup-page flex mt-10">
       <div className="left-side  p-4 rounded-xl flex flex-col items-center mt-3">
@@ -140,7 +146,8 @@ const page = () => {
       </div>
     </div>
     </div>
-    
+    <Footer/>
+    </div>
   
   )
 }

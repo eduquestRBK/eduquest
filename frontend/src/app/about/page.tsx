@@ -2,10 +2,16 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserGraduate, faChalkboardTeacher } from '@fortawesome/free-solid-svg-icons';
 import { faLightbulb } from '@fortawesome/free-regular-svg-icons';
+import Navbar from "../component/Navbar";
+import Footer from '../component/Footer'
+
+
 
 const About: React.FC = () => {
   return (
-    <section className="py-6 sm:py-8 bg-white">
+    <div className="">
+      <Navbar/>
+    <section className="py-12 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-4 sm:mb-6">About Us</h1>
 
@@ -56,6 +62,8 @@ const About: React.FC = () => {
         </div>
       </div>
     </section>
+    <Footer/>
+    </div>
   );
 };
 
