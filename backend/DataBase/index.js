@@ -29,7 +29,7 @@ EnrollmentRequest.associate({ Student, Course })
     console.log("Database & tables created!")
   })
   .catch((error) => console.error("Unable to create tables:", error))*/
-
+  
 
 async function testConnection() {
   try {
