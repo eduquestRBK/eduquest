@@ -22,7 +22,6 @@ export default function signin(){
 
 
   async function handleSubmit() {
-    // event.preventDefault();
     try {
       const response = await axios.post('http://127.0.0.1:5000/api/authentication/login', {
         email,
