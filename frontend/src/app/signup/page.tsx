@@ -13,6 +13,8 @@ import Link from "next/link";
 import axios from "axios"
 import { useRouter } from 'next/navigation'
 import Navbar from "../component/Navbar";
+import Footer from '../component/Footer'
+
 
 
 const page = () => {
@@ -144,6 +146,7 @@ const page = () => {
       </div>
     </div>
     </div>
+    <Footer/>
     </div>
   
   )

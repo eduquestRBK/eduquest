@@ -8,6 +8,9 @@ import Link from "next/link"
 import axios from "axios"
 import { useState } from "react";
 import { useRouter } from 'next/navigation'
+import Navbar from "../component/Navbar";
+import Footer from '../component/Footer'
+
 
 
 export default function signin(){
@@ -59,6 +62,8 @@ export default function signin(){
 console.log(Error);
 
     return (
+      <div className="">
+      <Navbar/>
      <div className="flex items-center justify-center mt-14">
       <div className=" login-page flex gap-4  overflow-hidden">
       <div className="">
@@ -126,6 +131,8 @@ console.log(Error);
         </div>
         </div>
       </div>
+    </div>
+    <Footer/>
     </div>
     )
   }

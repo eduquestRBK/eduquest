@@ -77,7 +77,7 @@
   width: 50rem;
 }
 .navigation {
-  border-left: 10px solid #a200ff;
+  border-left: 10px solid #171a29;
   transition: 0.5s;
   overflow: hidden;
 }
@@ -147,4 +147,7 @@
   border-radius: 50%;
   box-shadow: 35px -35px 0 10px white;
   pointer-events: none;
+}
+.close-icon{
+  margin-top: -4.1rem;
 }
