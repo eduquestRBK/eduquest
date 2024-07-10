@@ -1,7 +1,7 @@
 const { cloudinary } = require('../Cloudinary/Cloudinary');
 const Course = require('../DataBase/Models/Courses')
 const EnrollmentRequest= require('../DataBase/Models/EnrollmentRequest')
-const Student = require('../DataBase/Models/Courses')
+const Student = require('../DataBase/Models/Students')
 
 
 // Controller function to fetch all students

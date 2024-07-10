@@ -29,9 +29,9 @@ const Navbar = () => {
                   Teach
                 </span>
               </Link>
-              <Link href="/community">
+              <Link href="/about">
                 <span className="text-gray-600 hover:text-primary px-3 py-2 rounded-md text-sm font-medium cursor-pointer">
-                  Community
+                  About us
                 </span>
               </Link>
             </div>
