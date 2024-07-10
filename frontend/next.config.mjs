@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
      images: {
-    domains: ['static.skillshare.com'], // Add any external hostnames for image optimization
+    domains: ['static.skillshare.com'], 
   },};
 
 export default nextConfig;
