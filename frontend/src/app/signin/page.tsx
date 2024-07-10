@@ -6,14 +6,17 @@ import {faAt} from '@fortawesome/free-solid-svg-icons'
 import { faLock } from '@fortawesome/free-solid-svg-icons'
 import Link from "next/link"
 import axios from "axios"
-import { NextApiRequest, NextApiResponse } from 'next'
 import { useState } from "react";
+import { useRouter } from 'next/navigation'
+
 
 export default function signin(){
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [Error, setError] = useState('');
-  const [role,setRole]=useState('')
+  const [roles,setRole]=useState('')
+  const route =useRouter()
+
 
   async function handleSubmit() {
     // event.preventDefault();
@@ -22,6 +25,7 @@ export default function signin(){
         email,
         password
       });
+      route.push('/')
       console.log(response.data);
       const { token, role} = response.data;
       localStorage.setItem('token', token);
@@ -43,11 +47,12 @@ export default function signin(){
         console.log("Login successful");
       } else {
       console.log('error');
-
         console.error("Authentication failed");
       }
 
     } catch (error) {
+      console.log(error);
+
       setError(error.response.data.msg);
     }
   }
@@ -111,7 +116,7 @@ console.log(Error);
           </form>
               <button
                 className="w-full px-6 py-3 mt-3  bg-[#a200ff] text-white rounded-lg hover:bg-white hover:text-[#a200ff] border-2 border-[#a200ff] transition-colors duration-300"
-                
+                type="button" 
                 onClick={()=>{handleSubmit()}}
               >
                 Login
