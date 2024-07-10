@@ -1,12 +1,63 @@
+'use client'
 import Image from "next/image"
 import signinPhoto from "../../image/make-a-logo-online.png"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faAt} from '@fortawesome/free-solid-svg-icons'
 import { faLock } from '@fortawesome/free-solid-svg-icons'
 import Link from "next/link"
+import axios from "axios"
+import { useState } from "react";
+import { useRouter } from 'next/navigation'
+
 
 export default function signin(){
- 
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [Error, setError] = useState('');
+  const [roles,setRole]=useState('')
+  const route =useRouter()
+
+
+  async function handleSubmit() {
+    // event.preventDefault();
+    try {
+      const response = await axios.post('http://127.0.0.1:5000/api/authentication/login', {
+        email,
+        password
+      });
+      route.push('/')
+      console.log(response.data);
+      const { token, role} = response.data;
+      localStorage.setItem('token', token);
+      
+      if (role === 'instructor') {
+          //yet3da lel dachbord mta3 instructor
+          return setRole('instructor')
+      } else if (role === 'student') {
+       //yet3ada lel dachbord mta3 student 
+       //bel <link> mta3 sign up button 
+       return setRole('student')
+
+      } else {
+        setError('Invalid role. Please contact support.')
+        setError('Invalid role. Please contact support.');
+
+      }
+      if (response.status === 200) {
+        console.log("Login successful");
+      } else {
+      console.log('error');
+        console.error("Authentication failed");
+      }
+
+    } catch (error) {
+      console.log(error);
+
+      setError(error.response.data.msg);
+    }
+  }
+console.log(Error);
+
     return (
      <div className="flex items-center justify-center mt-14">
       <div className=" login-page flex gap-4  overflow-hidden">
@@ -25,6 +76,7 @@ export default function signin(){
           Please enter your email address and password to proceed
           </p>
           <form className="space-y-4">
+          {Error&&<span className="error-message mt-8 flex items-center justify-center bg-[#EF665B] p-2 w-68 text-sm font-bold text-[#fff] rounded-lg" id="name-error"> {Error}</span>}
             <div>
               <label htmlFor="Email" className="block font-semibold text-gray-700">
                 Email
@@ -36,6 +88,7 @@ export default function signin(){
                 className="w-full ml-2 outline-none"
                 placeholder="Enter your email address"
                 type="text"
+                onChange={(e) => setEmail(e.target.value)}
                 required
               />
               </div>
@@ -53,19 +106,21 @@ export default function signin(){
                 className="w-full ml-2 outline-none"
                 placeholder="Enter Password"
                 type="password"
+                onChange={(e) => setPassword(e.target.value)}
                 required
               />
               </div>
             </div>
             <div className="">
+            </div>
+          </form>
               <button
                 className="w-full px-6 py-3 mt-3  bg-[#a200ff] text-white rounded-lg hover:bg-white hover:text-[#a200ff] border-2 border-[#a200ff] transition-colors duration-300"
-                type="submit"
+                type="button" 
+                onClick={()=>{handleSubmit()}}
               >
                 Login
               </button>
-            </div>
-          </form>
           <div className="signup-sugg">
           <h5 className="mt-3 flex items-center justify-center">Don't have an account? <Link href='/signup' className="text-[#a200ff] ml-3 font-bold">Sign up</Link> </h5>
         </div>
