@@ -5,9 +5,15 @@ import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserGraduate, faChalkboardTeacher } from '@fortawesome/free-solid-svg-icons';
 import { faLightbulb } from '@fortawesome/free-regular-svg-icons';
+import Navbar from "../component/Navbar";
+import Footer from '../component/Footer'
+
+
 
 const About: React.FC = () => {
   return (
+    <div className="">
+      <Navbar/>
     <section className="py-12 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">About Us</h1>
@@ -71,6 +77,8 @@ const About: React.FC = () => {
         </div>
       </div>
     </section>
+    <Footer/>
+    </div>
   );
 };
 
