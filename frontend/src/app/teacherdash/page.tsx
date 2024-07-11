@@ -11,13 +11,17 @@ import Logo from '../../image/dash-logo.png'
 import WhiteLogo from '../../image/white-logo.png'
 import Image from 'next/image'
 import  {faCircleXmark} from '@fortawesome/free-solid-svg-icons'
-
-
-
-
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import Home from './home'
+import Students from './Students'
 
 const page = () => {
     const [active,setActive]=useState(false)
+    const [navigation,setNavigation]=useState('home')
+    
+
+    
   return (
     <div className="">
         <div className="container relative w-full ">
@@ -31,21 +35,21 @@ const page = () => {
                     </a>
                 </li>
                 <FontAwesomeIcon icon={!active ? faBars : faCircleXmark} className={!active ? 'h-7 ml-5 m-2 cursor-pointer text-[#fff]' : 'close-icon h-7 absolute ml-64 m-2  cursor-pointer text-[#fff]'} onClick={()=>setActive(!active)} />
-                <li className="relative w-full">
-                    <a href="#" className="relative block w-full text-[#fff]">
+                <li className="relative w-full" onClick={()=>setNavigation('home')}>
+                    <Link href="/teacherdash" className="relative block w-full text-[#fff]">
                         <span className="icon relative">
                         <FontAwesomeIcon icon={faHouseUser} className='h-7' />
                         </span>
                         <span className="title">Dashboard</span>
-                    </a>
+                    </Link>
                 </li>
 
-                <li className="relative w-full">
-                    <a href="#" className="relative block w-full text-[#fff]">
+                <li className="relative w-full " onClick={()=>setNavigation('students')}>
+                    <Link href="" className="relative block w-full text-[#fff]">
                         <span className="icon">
                         <FontAwesomeIcon icon={faUsers} className='h-7' />                        </span>
-                        <span className="title">Customers</span>
-                    </a>
+                        <span className="title">Students</span>
+                    </Link>
                 </li>
 
                 <li className="relative w-full">
@@ -85,6 +89,8 @@ const page = () => {
             </ul>
         </div>
     </div>
+    {navigation === 'home' && <Home active={active} />}
+    {navigation === 'students' && <Students active={active} />}
     </div>
   )
 }

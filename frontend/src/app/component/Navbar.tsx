@@ -1,3 +1,4 @@
+"use client"
 import Link from 'next/link';
 import logo from '../../image/eduquest.png';
 import Image from 'next/image';
@@ -5,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
+  
   return (
     <nav className="bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

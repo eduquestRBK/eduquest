@@ -151,3 +151,17 @@
 .close-icon{
   margin-top: -4.1rem;
 }
+.top-bar{
+  padding: 0 100px;
+}
+.main-dash{
+  width: calc(100% - 300px);
+  left: 300px;
+  min-height: 100vh;
+  transition: .5s;
+}
+.main-dash-act{
+  width:calc(100% - 40px);
+  left:40px;
+  transition: .5s;
+}
