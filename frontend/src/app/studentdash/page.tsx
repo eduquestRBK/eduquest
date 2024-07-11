@@ -17,6 +17,9 @@ import WhiteLogo from "../../image/white-logo.png";
 import ProfileCard from "./ProfileCard";
 import TopCourses from "./TopCourses";
 import Link from "next/link";
+import HelpSection from "./HelpSection";
+import MyCourses from "./MyCourses";
+import Settings from "./Settings";
 
 const Page = () => {
   const [active, setActive] = useState(false);
@@ -52,9 +55,10 @@ const Page = () => {
         );
       case "classes":
         return (
-          <div className="bg-white p-8 rounded-lg mb-8 text-[#171a29]">
-            <h2 className="text-4xl font-bold mb-4">Classes</h2>
-            {/* Add your Classes component or content here */}
+          <div className="bg-white rounded-lg  text-[#171a29]">
+      <h2 className="text-2xl font-bold mb-4 text-primary">My Courses</h2>
+
+            <MyCourses/>
           </div>
         );
       case "savedClasses":
@@ -65,15 +69,14 @@ const Page = () => {
       case "help":
         return (
           <div className="bg-white p-8 rounded-lg mb-8 text-[#171a29]">
-            <h2 className="text-4xl font-bold mb-4">Help</h2>
-            {/* Add your Help component or content here */}
+            <HelpSection/>
           </div>
         );
       case "settings":
         return (
           <div className="bg-white p-8 rounded-lg mb-8 text-[#171a29]">
             <h2 className="text-4xl font-bold mb-4">Settings</h2>
-            {/* Add your Settings component or content here */}
+            <Settings/>
           </div>
         );
       default:
@@ -139,7 +142,7 @@ const Page = () => {
                   <span className="icon">
                     <FontAwesomeIcon icon={faBook} className="h-7" />
                   </span>
-                  <span className="title">Classes</span>
+                  <span className="title">My courses</span>
                 </a>
               </li>
               <li className="relative w-full">
