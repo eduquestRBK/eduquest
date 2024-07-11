@@ -1,4 +1,3 @@
-// HeroSection.jsx (Client Component example)
 import Link from 'next/link';
 import hero from '../../image/hero2.png';
 

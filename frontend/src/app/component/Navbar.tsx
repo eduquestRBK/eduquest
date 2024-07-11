@@ -21,7 +21,7 @@ const Navbar = () => {
                   Browse
                 </span>
               </Link>
-              <Link href="/learn">
+              <Link href="/allCourses">
                 <span className="text-gray-600 hover:text-primary px-3 py-2 rounded-md text-sm font-medium cursor-pointer">
                   Learn
                 </span>
@@ -38,23 +38,23 @@ const Navbar = () => {
               </Link>
             </div>
           </div>
-          <div className="hidden sm:flex items-center space-x-4">
+          <div className="hidden sm:flex items-center space-x-5 ">
           <div className="relative flex items-center">
               <input
                 type="search"
-                className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none "
                 placeholder="Search"
               />
-              <FontAwesomeIcon icon={faSearch} className=" w-5 absolute right-3 top-3 text-primary  cursor-pointer " />
+              <FontAwesomeIcon icon={faSearch} className=" w-4 absolute right-3 top-3 text-primary  cursor-pointer " />
             </div>
             <Link href="/signup">
-              <button className="inline-flex items-center px-4 py-2 bg-white text-primary rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary font-medium">
-                Sign Up
+              <button className="inline-flex items-center px-4 py-2 bg-primary text-white rounded-md">
+                SignUp
               </button>
             </Link>
             <Link href="/signin">
-              <button className="inline-flex items-center px-4 py-2 bg-white text-primary rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary font-medium">
-                Log In
+              <button className="inline-flex items-center px-4 py-2 bg-primary text-white rounded-md ">
+                LogIn
               </button>
             </Link>
             

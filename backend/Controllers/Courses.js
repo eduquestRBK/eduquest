@@ -1,4 +1,5 @@
 const Course = require('../DataBase/Models/Courses');
+const {cloudinary} = require('../Cloudinary/Cloudinary.js');
 
 async function createCourse(req, res) {
     try {
@@ -8,6 +9,7 @@ async function createCourse(req, res) {
             category: req.body.category,
             content: req.body.content,
             note: req.body.note,
+            image: req.body.image,
             instructorId: req.params.instructorId 
         });
         res.status(201).json(newCourse);
@@ -39,8 +41,32 @@ const getCourseById= async(req,res)=>{
 
 }
 
+const uploadCourseImage = async (req, res) => {
+    const { id } = req.params;
+  
+    try {
+      const course = await Course.findByPk(id);
+      if (!course) {
+        return res.status(404).json({ message: 'course not found' });
+      }
+  
+      if (req.file) {
+        const result = await cloudinary.uploader.upload(req.file.path);
+        course.image = result.secure_url;
+        await Course.save();
+        res.status(200).json({ message: 'course image uploaded successfully',  });
+      } else {
+        res.status(400).json({ message: 'No image file uploaded' });
+      }
+    } catch (error) {
+      console.error('Error uploading course image:', error);
+      res.status(500).json({ message: 'Failed to upload course image' });
+    }
+  };
+
 module.exports = {
     createCourse,
     getAllCourses,
-    getCourseById
+    getCourseById,
+    uploadCourseImage
 };

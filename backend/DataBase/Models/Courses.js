@@ -38,6 +38,11 @@ class Course extends Model {
         type: DataTypes.STRING,
         allowNull: true,
       },
+      image :{
+        type: DataTypes.STRING,
+        allowNull: true,
+        
+      }
     }, {
       sequelize,
       modelName: 'Course',

@@ -15,6 +15,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import Home from './home'
 import Students from './Students'
+import Profile from '../studentdash/ProfileCard'
 
 const page = () => {
     const [active,setActive]=useState(false)
@@ -88,7 +89,11 @@ const page = () => {
                 </li>
             </ul>
         </div>
+        
     </div>
+    <div className="profile-card absolute ">
+        <Profile/>
+        </div>
     {navigation === 'home' && <Home active={active} />}
     {navigation === 'students' && <Students active={active} />}
     </div>

@@ -165,3 +165,17 @@
   left:40px;
   transition: .5s;
 }
+.statics{
+  display: flex;
+  max-width: 50rem;
+  transition: .5s;
+}
+.new-students-table{
+  width: 40rem;
+}
+.new-students-table-active{
+  width: 36rem;
+}
+.profile-card{
+  margin-left: 61rem;
+}
