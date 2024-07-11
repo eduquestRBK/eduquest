@@ -20,9 +20,69 @@ import Link from "next/link";
 
 const Page = () => {
   const [active, setActive] = useState(false);
+  const [activeTab, setActiveTab] = useState("dashboard");
+
+  const renderContent = () => {
+    switch (activeTab) {
+      case "dashboard":
+        return (
+          <div className="bg-white p-8 rounded-lg mb-8 text-[#171a29] ">
+            <div className="flex items-center space-x-4">
+              <div className="flex-2">
+                <h2 className="text-4xl font-bold">
+                  Welcome to <span className="text-primary font-bold">Eduquest</span>, Yosr!
+                </h2>
+                <p className="mt-2 text-lg font-semibold text-[#171a29]">
+                  We’re excited to have you here. Dive into your{" "}
+                  <span className="text-primary">courses</span>, explore new{" "}
+                  <span className="text-primary">projects</span>, and join our{" "}
+                  <span className="text-primary">live sessions</span>. Remember,
+                  every step you take is a step closer to mastering new{" "}
+                  <span className="text-primary">skills</span>. Let's get started!
+                </p>
+              </div>
+            </div>
+            <div className="mt-6">
+              <button className="inline-flex items-center px-10 py-2 bg-primary text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 font-medium mt-6 transition-all duration-300 ease-in-out transform hover:scale-105 hover:translate-x-1 animate-bounce">
+                Explore
+              </button>
+            </div>
+            <TopCourses />
+          </div>
+        );
+      case "classes":
+        return (
+          <div className="bg-white p-8 rounded-lg mb-8 text-[#171a29]">
+            <h2 className="text-4xl font-bold mb-4">Classes</h2>
+            {/* Add your Classes component or content here */}
+          </div>
+        );
+      case "savedClasses":
+        return (
+          <div className="bg-white p-8 rounded-lg mb-8 text-[#171a29]">
+          </div>
+        );
+      case "help":
+        return (
+          <div className="bg-white p-8 rounded-lg mb-8 text-[#171a29]">
+            <h2 className="text-4xl font-bold mb-4">Help</h2>
+            {/* Add your Help component or content here */}
+          </div>
+        );
+      case "settings":
+        return (
+          <div className="bg-white p-8 rounded-lg mb-8 text-[#171a29]">
+            <h2 className="text-4xl font-bold mb-4">Settings</h2>
+            {/* Add your Settings component or content here */}
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
 
   return (
-    <div className="min-h-screen flex font-sans ">
+    <div className="min-h-screen flex font-sans">
       {/* Sidebar */}
       <div className="">
         <div className="container relative w-full">
@@ -59,7 +119,11 @@ const Page = () => {
                 onClick={() => setActive(!active)}
               />
               <li className="relative w-full">
-                <a href="#" className="relative block w-full text-[#fff]">
+                <a
+                  href="#"
+                  className="relative block w-full text-[#fff]"
+                  onClick={() => setActiveTab("dashboard")}
+                >
                   <span className="icon relative">
                     <FontAwesomeIcon icon={faHouseUser} className="h-7" />
                   </span>
@@ -67,23 +131,36 @@ const Page = () => {
                 </a>
               </li>
               <li className="relative w-full">
-                <Link href="/studentdas/allCourses" className="relative block w-full text-[#fff]">
+                <a
+                  href="#"
+                  className="relative block w-full text-[#fff]"
+                  onClick={() => setActiveTab("classes")}
+                >
                   <span className="icon">
                     <FontAwesomeIcon icon={faBook} className="h-7" />
                   </span>
                   <span className="title">Classes</span>
-                </Link>
+                </a>
               </li>
               <li className="relative w-full">
-                <a href="#" className="relative block w-full text-[#fff]">
+                <a
+                  href="#"
+                  className="relative block w-full text-[#fff]"
+                  onClick={() => setActiveTab("savedClasses")}
+                >
                   <span className="icon">
                     <FontAwesomeIcon icon={faBookmark} className="h-7" />
                   </span>
                   <span className="title">Saved Classes</span>
+                  
                 </a>
               </li>
               <li className="relative w-full">
-                <a href="#" className="relative block w-full text-[#fff]">
+                <a
+                  href="#"
+                  className="relative block w-full text-[#fff]"
+                  onClick={() => setActiveTab("help")}
+                >
                   <span className="icon">
                     <FontAwesomeIcon
                       icon={faCircleQuestion}
@@ -94,7 +171,11 @@ const Page = () => {
                 </a>
               </li>
               <li className="relative w-full">
-                <a href="#" className="relative block w-full text-[#fff]">
+                <a
+                  href="#"
+                  className="relative block w-full text-[#fff]"
+                  onClick={() => setActiveTab("settings")}
+                >
                   <span className="icon">
                     <FontAwesomeIcon icon={faSliders} className="h-7" />
                   </span>
@@ -116,40 +197,15 @@ const Page = () => {
 
       {/* Main Content */}
       <div className={`flex-1 p-8 ml-${active ? "64" : "20"}`}>
-        <div className="bg-white p-8 rounded-lg  mb-8 text-[#171a29] ">
-          <div className="flex items-center space-x-4">
-            <div className="flex-2">
-              <h2 className="text-4xl font-bold">
-                Welcome to <span className="text-primary font-bold">Eduquest</span>, Yosr!
-              </h2>
-              <p className="mt-2 text-lg font-semibold text-[#171a29]">
-                We’re excited to have you here. Dive into your{" "}
-                <span className="text-primary">courses</span>, explore new{" "}
-                <span className="text-primary">projects</span>, and join our{" "}
-                <span className="text-primary">live sessions</span>. Remember,
-                every step you take is a step closer to mastering new{" "}
-                <span className="text-primary">skills</span>. Let's get started!
-              </p>
-            </div>
-          </div>
-          <div className="mt-6">
-            <button className="inline-flex items-center px-10 py-2 bg-primary text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 font-medium mt-6 transition-all duration-300 ease-in-out transform hover:scale-105 hover:translate-x-1 animate-bounce">
-              Explore
-            </button>
-          </div>
-        </div>
-         <TopCourses/>
-
-          
+        {renderContent()}
       </div>
 
       {/* Profile Card Section */}
-      <div className=" flex-basis p-4 ml-8 bg-gray-200 rounded-lg shadow-md h-full  mt-9 mr-2">
-         <ProfileCard />
-
-          
-      </div>
-      
+      {activeTab === "dashboard" && (
+        <div className="flex-basis p-4 ml-8 bg-gray-200 rounded-lg shadow-md h-full mt-9 mr-2">
+          <ProfileCard />
+        </div>
+      )}
     </div>
   );
 };
