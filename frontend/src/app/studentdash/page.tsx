@@ -60,8 +60,6 @@ const Page = () => {
       case "savedClasses":
         return (
           <div className="bg-white p-8 rounded-lg mb-8 text-[#171a29]">
-            <h2 className="text-4xl font-bold mb-4">Saved Classes</h2>
-            {/* Add your Saved Classes component or content here */}
           </div>
         );
       case "help":
@@ -154,6 +152,7 @@ const Page = () => {
                     <FontAwesomeIcon icon={faBookmark} className="h-7" />
                   </span>
                   <span className="title">Saved Classes</span>
+                  
                 </a>
               </li>
               <li className="relative w-full">
