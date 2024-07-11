@@ -19,7 +19,7 @@ const Navbar = () => {
                   Browse
                 </span>
               </Link>
-              <Link href="/allCourses">
+              <Link href="/learn">
                 <span className="text-gray-600 hover:text-primary px-3 py-2 rounded-md text-sm font-medium cursor-pointer">
                   Learn
                 </span>
