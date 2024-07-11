@@ -4,7 +4,7 @@ import { faCode, faBook, faUser, faStar } from '@fortawesome/free-solid-svg-icon
 import Image from 'next/image';
 import image1 from '../../image/allcourses-bg.jpg';
 
-const TopCourses = () => {
+const TopCourses = (props) => {
   const courses = [
     {
       id: 1,

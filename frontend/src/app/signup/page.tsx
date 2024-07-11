@@ -10,7 +10,7 @@ import { faEnvelope} from '@fortawesome/free-solid-svg-icons'
 import { faMobileScreenButton } from '@fortawesome/free-solid-svg-icons'
 import {useState} from "react";
 import Link from "next/link";
-import axios from "axios"
+import axios, { AxiosError } from "axios"
 import { useRouter } from 'next/navigation'
 import Navbar from "../component/Navbar";
 import Footer from '../component/Footer'
@@ -25,9 +25,20 @@ const page = () => {
   const [mobile,setMobile]=useState('')
   const [gender,setGender]=useState('')
   const [role,setRole]=useState('')
-  const [error,setError]=useState({})
   const route =useRouter()
-
+  interface User {
+    username: string;
+    password: string;
+    email: string;
+    phone: string;
+    gender: string;
+    role: string;
+    fields: string;
+  }
+  interface Errors {
+    [key: string]: string;
+  }
+  const [error,setError]=useState<Errors>({})
   
   const user ={
     username: username,
@@ -39,14 +50,14 @@ const page = () => {
     fields:'Math'
   }
 
-  const signUpUser = async (newUser)=>{
+  const signUpUser = async (newUser:User)=>{
     try {
       const handleSignUp = await axios.post('http://127.0.0.1:5000/api/authentication/register',newUser)
       route.push('/')
        
-    } catch (error) {
+    } catch (error : any) {
       const errors = {}
-       error.response.data.errors.forEach((ele)=>{
+       error.response.data.errors.forEach((ele : { path: string; msg: string; })=>{
         errors[ele.path] = ele.msg      
        })
        setError(errors)
