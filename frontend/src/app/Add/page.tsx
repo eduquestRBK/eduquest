@@ -7,6 +7,8 @@ import Image from 'next/image';
 import background from '../../image/a200ff.png'
 import Navbar from "../component/Navbar";
 import Footer from '../component/Footer'
+import axios from 'axios';
+import { log } from 'console';
 
 const AddCoursePage = () => {
   const [title, setTitle] = useState('');
@@ -15,6 +17,50 @@ const AddCoursePage = () => {
   const [content, setContent] = useState('');
   const [note, setNote] = useState('');
   const [image, setImage] = useState(null);
+  const [Error, setError] = useState('');
+
+
+
+  async function handelCreat(){
+    try {
+      const result=await axios('http://127.0.0.1:5000/api/course/createCourse',{
+        title,
+        description,
+        category,
+        content,
+        note,
+        image
+    })
+    if(result.status===201){
+      console.log('course created successfuly');
+    }else{
+      console.log('creation course failed')
+    }
+    } catch (error) {
+      console.log(error);
+      
+      setError(error.response.data.msg);
+    }
+  }
+
+  async function handelimage(){
+    const id=req.params
+    try {
+      const result=await axios(`http://127.0.0.1:5000/api/course/${id}/upload-image`,{
+      image
+    })
+    if(result.status===201){
+      console.log('course created successfuly');
+    }else{
+      console.log('creation course failed')
+    }
+    } catch (error) {
+      console.log(error);
+      
+      setError(error.response.data.msg);
+    }
+  }
+  
 
   const handleImageUpload = (e) => {
     setImage(e.target.files[0]);
@@ -30,7 +76,6 @@ const AddCoursePage = () => {
     <div>
       <Navbar />
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
       <div className="relative w-full h-64 bg-gradient-to-r from-blue-500 to-purple-600 text-white flex items-center justify-center ">
         <Image src={background} layout="fill" objectFit="cover" alt="Background" className="absolute z-0" />
         <div className="relative z-10 text-center">
@@ -38,10 +83,8 @@ const AddCoursePage = () => {
           <p className="text-xl mt-2">Share your knowledge with the world</p>
         </div>
       </div>
-
-      {/* Form Card */}
       <div className="max-w-4xl mx-auto py-10 px-6 bg-white shadow-lg rounded-lg">
-        {/* Progress Indicator */}
+        
         <div className="flex justify-center items-center mb-8">
         <div className="w-1/4 h-1 bg-primary rounded-full"></div>
         </div>
@@ -112,8 +155,9 @@ const AddCoursePage = () => {
           </div>
           <div className="mt-6 text-center">
             <button
-              type="submit"
+              type="button"
               className="bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:shadow-lg transition duration-300"
+              onClick={()=>{handelCreat()}}
             >
               Add Course
             </button>
