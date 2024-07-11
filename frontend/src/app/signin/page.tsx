@@ -20,6 +20,10 @@ export default function signin(){
   const [roles,setRole]=useState('')
   const route =useRouter()
 
+  const user ={
+   password:  password,
+    email: email
+  }
 
   async function handleSubmit() {
     try {
