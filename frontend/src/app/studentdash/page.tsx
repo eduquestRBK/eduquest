@@ -16,12 +16,13 @@ import Logo from "../../image/dash-logo.png";
 import WhiteLogo from "../../image/white-logo.png";
 import ProfileCard from "./ProfileCard";
 import TopCourses from "./TopCourses";
+import Link from "next/link";
 
 const Page = () => {
   const [active, setActive] = useState(false);
 
   return (
-    <div className="min-h-screen flex font-sans">
+    <div className="min-h-screen flex font-sans ">
       {/* Sidebar */}
       <div className="">
         <div className="container relative w-full">
@@ -66,12 +67,12 @@ const Page = () => {
                 </a>
               </li>
               <li className="relative w-full">
-                <a href="#" className="relative block w-full text-[#fff]">
+                <Link href="/studentdas/allCourses" className="relative block w-full text-[#fff]">
                   <span className="icon">
                     <FontAwesomeIcon icon={faBook} className="h-7" />
                   </span>
                   <span className="title">Classes</span>
-                </a>
+                </Link>
               </li>
               <li className="relative w-full">
                 <a href="#" className="relative block w-full text-[#fff]">
@@ -115,13 +116,13 @@ const Page = () => {
 
       {/* Main Content */}
       <div className={`flex-1 p-8 ml-${active ? "64" : "20"}`}>
-        <div className="bg-[#ECCAFF] p-8 rounded-lg  mb-8 text-[#171a29]">
+        <div className="bg-white p-8 rounded-lg  mb-8 text-[#171a29] ">
           <div className="flex items-center space-x-4">
             <div className="flex-2">
               <h2 className="text-4xl font-bold">
-                Welcome to <span className="text-primary">Eduquest</span>, [Student Name]!
+                Welcome to <span className="text-primary font-bold">Eduquest</span>, Yosr!
               </h2>
-              <p className="mt-2 text-lg">
+              <p className="mt-2 text-lg font-semibold text-[#171a29]">
                 We’re excited to have you here. Dive into your{" "}
                 <span className="text-primary">courses</span>, explore new{" "}
                 <span className="text-primary">projects</span>, and join our{" "}
@@ -137,15 +138,13 @@ const Page = () => {
             </button>
           </div>
         </div>
-        <div className=" flex-basis p-4 ml-8 bg-[#171A29] rounded-lg shadow-md h-full  mt-9 mr-2">
          <TopCourses/>
 
           
       </div>
-      </div>
 
       {/* Profile Card Section */}
-      <div className=" flex-basis p-4 ml-8 bg-[#171A29] rounded-lg shadow-md h-full  mt-9 mr-2">
+      <div className=" flex-basis p-4 ml-8 bg-gray-200 rounded-lg shadow-md h-full  mt-9 mr-2">
          <ProfileCard />
 
           
