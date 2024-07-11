@@ -8,7 +8,7 @@ import background from '../../image/a200ff.png'
 import Navbar from "../component/Navbar";
 import Footer from '../component/Footer'
 
-const AddCoursePage = () => {
+const UpdateCourse = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
@@ -34,8 +34,8 @@ const AddCoursePage = () => {
       <div className="relative w-full h-64 bg-gradient-to-r from-blue-500 to-purple-600 text-white flex items-center justify-center ">
         <Image src={background} layout="fill" objectFit="cover" alt="Background" className="absolute z-0" />
         <div className="relative z-10 text-center">
-          <h1 className="text-4xl font-bold">Create a New Course</h1>
-          <p className="text-xl mt-2">Share your knowledge with the world</p>
+          <h1 className="text-4xl font-bold">Update the Course</h1>
+          <p className="text-xl mt-2">Give your best to the world</p>
         </div>
       </div>
 
@@ -115,7 +115,7 @@ const AddCoursePage = () => {
               type="submit"
               className="bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:shadow-lg transition duration-300"
             >
-              Add Course
+              Update Course
             </button>
           </div>
         </form>
@@ -126,4 +126,4 @@ const AddCoursePage = () => {
   );
 };
 
-export default AddCoursePage;
+export default UpdateCourse;
