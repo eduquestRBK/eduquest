@@ -53,7 +53,7 @@ const page = () => {
   const signUpUser = async (newUser:User)=>{
     try {
       const handleSignUp = await axios.post('http://127.0.0.1:5000/api/authentication/register',newUser)
-      route.push('/')
+      route.push('/signin')
        
     } catch (error : any) {
       const errors = {}
