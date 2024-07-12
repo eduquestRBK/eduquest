@@ -3,12 +3,15 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload, faBook, faClipboard, faTag } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
+
 const UpdateCourse = (props: { active: boolean }) => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [category, setCategory] = useState('');
-  const [content, setContent] = useState('');
-  const [note, setNote] = useState('');
+  const [course,setCourse]=useState({})
+  const [title, setTitle] = useState(course.title);
+  const [description, setDescription] = useState(course.description);
+  const [category, setCategory] = useState(course.category);
+  const [content, setContent] = useState(course.content);
+  const [note, setNote] = useState(course.note);
   const [image, setImage] = useState(null);
 
   const handleImageUpload = (e: React.FormEvent<HTMLInputElement>) => {
@@ -22,6 +25,30 @@ const UpdateCourse = (props: { active: boolean }) => {
     // Handle form submission logic
     console.log({ title, description, category, content, note, image });
   };
+  
+  
+
+  const getAllCourse=async(courseId)=>{
+    try {
+      const result =await axios.get(`/api/course/course/${courseId}`)
+      // console.log(result.data)
+      setCourse(result.data)
+    } catch (error) {
+      console.log(error);
+      
+    }
+  }
+
+  const  UpdateCourse=async(courseId,body)=> {
+    try {
+      const result = await axios.put(`http://127.0.0.1:5000/api/instructor/instructors/courses/${courseId}`,body)
+      console.log('Talent updated successfully', result.data)
+      getAllCourse()
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
 
   return (
     <div>
@@ -93,7 +120,7 @@ const UpdateCourse = (props: { active: boolean }) => {
             />
           </div>
           </div>
-          <div className={props.active?"inputs-update flex items-center py-2 mt-2 rounded-lg ml-44 bg-[#171a29] w-36 justify-center":"inputs-update flex items-center py-2 mt-2 rounded-lg ml-72 bg-[#171a29] w-36 justify-center"}>
+          {/* <div className={props.active?"inputs-update flex items-center py-2 mt-2 rounded-lg ml-44 bg-[#171a29] w-36 justify-center":"inputs-update flex items-center py-2 mt-2 rounded-lg ml-72 bg-[#171a29] w-36 justify-center"}>
             <label className="inline-block cursor-pointer">
               <FontAwesomeIcon icon={faUpload} className="text-[#fff]" />
               <span className="text-[#fff] ml-1">Upload Image</span>
@@ -106,11 +133,12 @@ const UpdateCourse = (props: { active: boolean }) => {
               />
             </label>
             {image && <span className="ml-4">{image.name}</span>}
-          </div>
+          </div> */}
           <div className="mt-6 text-center">
             <button
               type="submit"
               className="bg-[#171a29] ml-10 rounded-lg text-white font-semibold py-2 px-4 transition duration-300"
+              onClick={()=>{UpdateCourse}}
             >
               Update Course
             </button>
