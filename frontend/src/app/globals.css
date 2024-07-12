@@ -177,7 +177,7 @@
   width: 36rem;
 }
 .profile-card{
-  margin-left: 61rem;
+  margin-left: 68rem;
 }
 .notice-tit {
   overflow: hidden; /* Ensures the content is not revealed until the animation */
@@ -228,3 +228,12 @@
   font-size:10px;
   transition: .5s;
  }
+ .allcorses{
+  transition: 0.5s;
+  width:60rem;
+ }
+.allcorses-act{
+  transition: 0.5s;
+ margin-left: 21rem;
+ width: 50rem;
+}

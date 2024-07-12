@@ -10,7 +10,7 @@ async function createCourse(req, res) {
             content: req.body.content,
             note: req.body.note,
             image: req.body.image,
-            instructorId: req.params.instructorId 
+            instructorId: req.body.instructorId 
         });
         res.status(201).json(newCourse);
     } catch (error) {

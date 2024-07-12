@@ -141,6 +141,10 @@ exports.login = [
                 user: {
                     id: user.id,
                     role: user.role,
+                    name: user.username,
+                    email: user.email,
+                    gender: user.gender,
+                    phone: user.phone
                 }
                
             }
