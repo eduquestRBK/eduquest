@@ -3,12 +3,7 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload, faBook, faClipboard, faTag } from '@fortawesome/free-solid-svg-icons';
-import Image from 'next/image';
-import background from '../../image/a200ff.png'
-import Navbar from "../component/Navbar";
-import Footer from '../component/Footer'
-
-const UpdateCourse = () => {
+const UpdateCourse = (props: { active: boolean }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
@@ -16,11 +11,13 @@ const UpdateCourse = () => {
   const [note, setNote] = useState('');
   const [image, setImage] = useState(null);
 
-  const handleImageUpload = (e) => {
-    setImage(e.target.files[0]);
+  const handleImageUpload = (e: React.FormEvent<HTMLInputElement>) => {
+    if (e.target && (e.target as HTMLInputElement).files) {
+      setImage(e.target.files[0]);
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
     // Handle form submission logic
     console.log({ title, description, category, content, note, image });
@@ -28,39 +25,28 @@ const UpdateCourse = () => {
 
   return (
     <div>
-      <Navbar />
-    <div className="min-h-screen bg-gray-50">
+    <div className={!props.active ?'main-dash-act absolute ' : 'main-dash  absolute '}>
       {/* Hero Section */}
-      <div className="relative w-full h-64 bg-gradient-to-r from-blue-500 to-purple-600 text-white flex items-center justify-center ">
-        <Image src={background} layout="fill" objectFit="cover" alt="Background" className="absolute z-0" />
-        <div className="relative z-10 text-center">
+      <div className={props.active?" ml-20 w-1/2 mt-10  flex flex-col items-center justify-center ":"relative ml-44 w-1/2 mt-10  flex flex-col items-center justify-center "}>
           <h1 className="text-4xl font-bold">Update the Course</h1>
-          <p className="text-xl mt-2">Give your best to the world</p>
-        </div>
+          <div className="flex items-center justify-center  ">
+          <p className="text-xl mt-2  p-2">Give your best to the world 🏅</p>
+          </div>
+          </div>
+      </div>
+      <div className={props.active ?"ml-52 w-1/2":""}>
+      <div className={props.active ? "notice-active absolute mt-36 w-1/3 ml-52 p-2 flex items-center justify-center text-center text-[#fff] text-sm bg-[#171a29]":"notice absolute mt-36  w-1/2 ml-44 p-2 flex items-center justify-center text-center text-[#fff] text-sm bg-[#171a29]"}>
+        <p className='notice-tit flex items-center'>We encourage everyone to give their best efforts in updating this course to enhance its quality.</p>
       </div>
 
-      {/* Form Card */}
-      <div className="max-w-4xl mx-auto py-10 px-6 bg-white shadow-lg rounded-lg">
-        {/* Progress Indicator */}
-        <div className="flex justify-center items-center mb-8">
-        <div className="w-1/4 h-1 bg-primary rounded-full"></div>
-        </div>
-
-        <h2 className="text-2xl font-bold mb-6 text-center">Course Details</h2>
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="mb-4">
+      <div className={props.active? "absolute ml-52 mt-52 w-1/3":"absolute ml-44 mt-52"}>
+      <form onSubmit={handleSubmit} className="">
+          <div className="flex gap-6">
+          <div className="up-input mb-4 ">
             <label className="block mb-2 text-sm font-medium text-gray-900">Course Title</label>
             <input
               type="text"
               onChange={(e) => setTitle(e.target.value)}
-              className="flex border p-2.5 rounded-lg w-full outline-none"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block mb-2 text-sm font-medium text-gray-900">Description</label>
-            <textarea
-              onChange={(e) => setDescription(e.target.value)}
               className="flex border p-2.5 rounded-lg w-full outline-none"
               required
             />
@@ -80,26 +66,37 @@ const UpdateCourse = () => {
               <option value="Art&Literature">Art & Literature</option>
             </select>
           </div>
+          </div>
           <div className="mb-4">
-            <label className="block mb-2 text-sm font-medium text-gray-900">Content</label>
+            <label className="block mb-2 text-sm font-medium text-gray-900">Description</label>
             <textarea
+              onChange={(e) => setDescription(e.target.value)}
+              className="flex border p-2.5 rounded-lg w-full outline-none"
+              required
+            />
+          </div>
+          <div className=" flex ">
+          <div className="newlink mb-4">
+            <label className="block mb-2 text-sm font-medium text-gray-900">New Link</label>
+            <input
               onChange={(e) => setContent(e.target.value)}
               className="flex border p-2.5 rounded-lg w-full outline-none"
               required
             />
           </div>
-          <div className="mb-4">
+          <div className="note mb-4   ">
             <label className="block mb-2 text-sm font-medium text-gray-900">Note</label>
             <input
               type="text"
               onChange={(e) => setNote(e.target.value)}
-              className="flex border p-2.5 rounded-lg w-full outline-none"
+              className="flex  border p-2.5 rounded-lg w-full outline-none"
             />
           </div>
-          <div className="flex items-center py-2">
+          </div>
+          <div className={props.active?"inputs-update flex items-center py-2 mt-2 rounded-lg ml-44 bg-[#171a29] w-36 justify-center":"inputs-update flex items-center py-2 mt-2 rounded-lg ml-72 bg-[#171a29] w-36 justify-center"}>
             <label className="inline-block cursor-pointer">
-              <FontAwesomeIcon icon={faUpload} className="text-primary mr-2" />
-              <span className="text-primary">Upload Image</span>
+              <FontAwesomeIcon icon={faUpload} className="text-[#fff]" />
+              <span className="text-[#fff] ml-1">Upload Image</span>
               <input
                 type="file"
                 id="image"
@@ -113,15 +110,15 @@ const UpdateCourse = () => {
           <div className="mt-6 text-center">
             <button
               type="submit"
-              className="bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold py-2 px-4 rounded-md shadow-md hover:shadow-lg transition duration-300"
+              className="bg-[#171a29] ml-10 rounded-lg text-white font-semibold py-2 px-4 transition duration-300"
             >
               Update Course
             </button>
           </div>
         </form>
+        </div>
       </div>
-    </div>
-    <Footer />
+
     </div>
   );
 };
