@@ -24,6 +24,8 @@ import Settings from "./Settings";
 const Page = () => {
   const [active, setActive] = useState(false);
   const [activeTab, setActiveTab] = useState("dashboard");
+  
+
 
   const renderContent = () => {
     switch (activeTab) {
