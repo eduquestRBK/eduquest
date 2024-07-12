@@ -2,26 +2,27 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouseUser } from '@fortawesome/free-solid-svg-icons'
 import { faUsers } from '@fortawesome/free-solid-svg-icons'
-import { faComment } from '@fortawesome/free-solid-svg-icons'
-import { faCircleQuestion } from '@fortawesome/free-solid-svg-icons'
-import { faSliders } from '@fortawesome/free-solid-svg-icons'
+import { faCirclePlus } from '@fortawesome/free-solid-svg-icons'
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
+import {faArrowRightFromBracket} from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 import Logo from '../../image/dash-logo.png'
 import WhiteLogo from '../../image/white-logo.png'
 import Image from 'next/image'
 import  {faCircleXmark} from '@fortawesome/free-solid-svg-icons'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 import Home from './home'
 import Students from './Students'
 import Profile from '../studentdash/ProfileCard'
+import UpdateCourse from './updateCorse'
+import AddCorse from './addCourse'
 
 const page = () => {
     const [active,setActive]=useState(false)
     const [navigation,setNavigation]=useState('home')
     
-
     
   return (
     <div className="">
@@ -54,35 +55,36 @@ const page = () => {
                 </li>
 
                 <li className="relative w-full">
-                    <a href="#" className="relative block w-full text-[#fff]">
+                    <a href="#" className="relative block w-full text-[#fff]" onClick={()=>setNavigation('addcourse')}>
                         <span className="icon">
-                        <FontAwesomeIcon icon={faComment} className='h-7' />
+                        <FontAwesomeIcon icon={faCirclePlus} className='h-7' />
                         </span>
-                        <span className="title">Messages</span>
+                        <span className="title">Add course</span>
                     </a>
                 </li>
 
                 <li className="relative w-full">
-                    <a href="#" className="relative block w-full text-[#fff]" >
+                    <a href="#" className="relative block w-full text-[#fff]" onClick={()=>setNavigation('updatecourse')} >
                         <span className="icon">
-                        <FontAwesomeIcon icon={faCircleQuestion} className='h-7' />
+                        <FontAwesomeIcon icon={faPenToSquare} className='h-7' />
                         </span>
-                        <span className="title">Help</span>
+                        <span className="title">Update course</span>
+                    </a>
+                </li>
+
+                <li className="relative w-full" onClick={()=>setNavigation('settings')}>
+                    <a href="#" className="relative block w-full text-[#fff]">
+                        <span className="icon">
+                        <FontAwesomeIcon icon={faTrash}  className='h-7' />
+                        </span>
+                        <span className="title">Delete course</span>
                     </a>
                 </li>
 
                 <li className="relative w-full">
                     <a href="#" className="relative block w-full text-[#fff]">
                         <span className="icon">
-                        <FontAwesomeIcon icon={faSliders} className='h-7' />
-                        </span>
-                        <span className="title">Settings</span>
-                    </a>
-                </li>
-
-                <li className="relative w-full">
-                    <a href="#" className="relative block w-full text-[#fff]">
-                        <span className="icon">
+                        <FontAwesomeIcon icon={faArrowRightFromBracket} className='h-7' />
                         </span>
                         <span className="title">Sign Out</span>
                     </a>
@@ -96,6 +98,8 @@ const page = () => {
         </div>
     {navigation === 'home' && <Home active={active} />}
     {navigation === 'students' && <Students active={active} />}
+    {navigation === 'addcourse' && <AddCorse active={active} />}
+    {navigation === 'updatecourse' && <UpdateCourse active={active} />}
     </div>
   )
 }
