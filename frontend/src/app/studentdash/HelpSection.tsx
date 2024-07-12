@@ -1,6 +1,4 @@
-"use client";
-
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faQuestionCircle,
@@ -8,112 +6,108 @@ import {
   faVideo,
   faComments,
   faEnvelope,
+  faPhoneAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
 const Help = () => {
+  const [expandedIndex, setExpandedIndex] = useState(null);
+
+  const handleToggle = (index) => {
+    if (expandedIndex === index) {
+      setExpandedIndex(null);
+    } else {
+      setExpandedIndex(index);
+    }
+  };
+
+  const questions = [
+    {
+      question: "How do I update my profile?",
+      answer:
+        "To reset your password, go to the setting page and click update tour profile there. ",
+    },
+  
+    {
+      question: "Can I cancel my subscription?",
+      answer:
+        "Yes, you can cancel your subscription at any time from your account settings. Your access will continue until the end of the current billing cycle.",
+    },
+    {
+      question: "How can I contact support?",
+      answer:
+        "You can contact our support team via email or phone. Our support email is support@yourcompany.com. For immediate assistance, call us at +1-800-123-4567.",
+    },
+  ];
+
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
+    <div className="min-h-screen  p-8">
       <h2 className="text-3xl font-bold mb-6 text-center">Help & Support</h2>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+      <div className="max-w-3xl mx-auto">
         {/* FAQ Section */}
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <div className="flex items-center mb-4">
-            <FontAwesomeIcon
-              icon={faQuestionCircle}
-              className="text-4xl text-blue-500"
-            />
-            <h3 className="ml-4 text-xl font-bold">FAQ</h3>
-          </div>
-          <p className="text-gray-600 mb-4">
-            Find answers to the most frequently asked questions.
-          </p>
-          <a
-            href="#"
-            className="text-blue-500 hover:text-blue-700 font-semibold"
-          >
-            Go to FAQ
-          </a>
-        </div>
-
-        {/* Tutorials Section */}
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <div className="flex items-center mb-4">
-            <FontAwesomeIcon
-              icon={faBook}
-              className="text-4xl text-green-500"
-            />
-            <h3 className="ml-4 text-xl font-bold">Tutorials</h3>
-          </div>
-          <p className="text-gray-600 mb-4">
-            Explore step-by-step guides and tutorials.
-          </p>
-          <a
-            href="#"
-            className="text-green-500 hover:text-green-700 font-semibold"
-          >
-            View Tutorials
-          </a>
-        </div>
-
-        {/* Video Guides Section */}
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <div className="flex items-center mb-4">
-            <FontAwesomeIcon
-              icon={faVideo}
-              className="text-4xl text-red-500"
-            />
-            <h3 className="ml-4 text-xl font-bold">Video Guides</h3>
-          </div>
-          <p className="text-gray-600 mb-4">
-            Watch video guides for more detailed explanations.
-          </p>
-          <a
-            href="#"
-            className="text-red-500 hover:text-red-700 font-semibold"
-          >
-            Watch Videos
-          </a>
-        </div>
-
-        {/* Community Forums Section */}
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <div className="flex items-center mb-4">
-            <FontAwesomeIcon
-              icon={faComments}
-              className="text-4xl text-purple-500"
-            />
-            <h3 className="ml-4 text-xl font-bold">Community Forums</h3>
-          </div>
-          <p className="text-gray-600 mb-4">
-            Join the community and ask your questions.
-          </p>
-          <a
-            href="#"
-            className="text-purple-500 hover:text-purple-700 font-semibold"
-          >
-            Visit Forums
-          </a>
+        <div className="mb-8">
+          <h3 className="text-xl font-bold mb-4">FAQ</h3>
+          {questions.map((item, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-lg shadow-md mb-4 overflow-hidden"
+            >
+              <button
+                onClick={() => handleToggle(index)}
+                className="flex items-center justify-between w-full p-4 focus:outline-none"
+              >
+                <div className="flex items-center">
+                  <FontAwesomeIcon
+                    icon={faQuestionCircle}
+                    className="text-2xl text-[#171a29] mr-4"
+                  />
+                  <h4 className="text-lg font-semibold">{item.question}</h4>
+                </div>
+                <FontAwesomeIcon
+                  icon={expandedIndex === index ? "chevron-up" : "chevron-down"}
+                  className="text-gray-400"
+                />
+              </button>
+              {expandedIndex === index && (
+                <div className="p-4 bg-gray-100">
+                  <p className="text-gray-600  font-semibold">{item.answer}</p>
+                </div>
+              )}
+            </div>
+          ))}
         </div>
 
         {/* Contact Support Section */}
-        <div className="bg-white p-6 rounded-lg shadow-md">
-          <div className="flex items-center mb-4">
-            <FontAwesomeIcon
-              icon={faEnvelope}
-              className="text-4xl text-orange-500"
-            />
-            <h3 className="ml-4 text-xl font-bold">Contact Support</h3>
+        <div>
+          <h3 className="text-xl font-bold mb-4">Contact Support</h3>
+          <div className="bg-white rounded-lg shadow-md p-6">
+            <div className="flex items-center mb-4">
+             
+              <h4 className="text-lg font-semibold">Email Support</h4>
+            </div>
+            <p className="text-gray-600 mb-4 font-semibold">
+              If you need further assistance, please contact our support team
+              via email.
+            </p>
+            <div className="flex items-center">
+              <FontAwesomeIcon icon={faEnvelope} className="text-[#171a29] mr-2" />
+              <span className="text-gray">support@Eduquest.com</span>
+            </div>
           </div>
-          <p className="text-gray-600 mb-4">
-            Get in touch with our support team for assistance.
-          </p>
-          <a
-            href="#"
-            className="text-orange-500 hover:text-orange-700 font-semibold"
-          >
-            Contact Us
-          </a>
+          <div className="bg-white rounded-lg shadow-md p-6 mt-4">
+            <div className="flex items-center mb-4">
+          
+              <h4 className="text-lg font-semibold">Phone Support</h4>
+            </div>
+            <p className="text-gray-600 mb-4">
+              For immediate assistance, call our support team during business
+              hours.
+            </p>
+            <div className="flex items-center">
+              <FontAwesomeIcon icon={faPhoneAlt} className="text-[#171a29] mr-2" />
+              <span className="text-gray">+216 99 855 238</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
