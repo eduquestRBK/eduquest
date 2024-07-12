@@ -21,10 +21,6 @@ const ProfileCard = () => {
 
   return (
     <div className="flex flex-col items-center p-4 relative">
-      {/* Edit Icon */}
-      <div className="absolute top-0 right-0 transform translate-x-1/3 -translate-y-1/3 rounded-full p-1 ">
-        <FontAwesomeIcon icon={faEdit} className="text-primary cursor-pointer text-sm h-5" />
-      </div>
 
       {/* Profile Picture */}
       <div className="relative rounded-full border-4 border-primary overflow-hidden w-24 h-24 mb-2">

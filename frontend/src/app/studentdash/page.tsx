@@ -56,7 +56,7 @@ const Page = () => {
       case "classes":
         return (
           <div className="bg-white rounded-lg  text-[#171a29]">
-            <h2 className="text-2xl font-bold mb-4 text-primary">My Courses</h2>
+            <h2 className="text-2xl font-bold mb-4 text-[#171a29] text-center">My Courses</h2>
             <MyCourses />
           </div>
         );
