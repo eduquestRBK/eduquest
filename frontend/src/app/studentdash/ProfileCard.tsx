@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faUser, faEnvelope, faPhone, faFemale, faHeart, faCalendarAlt } from '@fortawesome/free-solid-svg-icons'; // Import additional icons as needed
+import { faEdit, faUser, faEnvelope, faPhone, faFemale, faHeart, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
 import profilePicture from "../../image/profile.jpg";
 
@@ -20,15 +20,13 @@ const ProfileCard = () => {
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center p-4 relative">
+
       {/* Profile Picture */}
       <div className="relative rounded-full border-4 border-primary overflow-hidden w-24 h-24 mb-2">
         <Image src={userData.profileImage} alt="Profile Picture" layout="fill" objectFit="cover" className="rounded-full" />
-        {/* Edit Icon */}
-        <div className="absolute bottom-0 left-0 transform -translate-x-1/2 translate-y-1/2 rounded-full p-1">
-          <FontAwesomeIcon icon={faEdit} className="text-black cursor-pointer" />
-        </div>
       </div>
+  
       {/* Username */}
       <div className="text-[#171a29] text-lg font-semibold">{userData.username}</div>
       {/* Email */}
@@ -38,22 +36,22 @@ const ProfileCard = () => {
       <div className="flex flex-col items-center text-gray-500 space-y-2">
         {/* Gender */}
         <div className="flex items-center">
-          <FontAwesomeIcon icon={faFemale} className="mr-2" />
+          <FontAwesomeIcon icon={faFemale} className="mr-2 h-4" />
           <span>{userData.gender}</span>
         </div>
         {/* Phone Number */}
         <div className="flex items-center">
-          <FontAwesomeIcon icon={faPhone} className="mr-2" />
+          <FontAwesomeIcon icon={faPhone} className="mr-2 h-4" />
           <span>{userData.phoneNumber}</span>
         </div>
         {/* Interests */}
         <div className="flex items-center">
-          <FontAwesomeIcon icon={faHeart} className="mr-2" />
+          <FontAwesomeIcon icon={faHeart} className="mr-2 h-4" />
           <span>{userData.interests.join(', ')}</span>
         </div>
       </div>
 
-      <div className="mt-4 w-full p-4   rounded-lg">
+      <div className="mt-4 w-full p-4 bg-white rounded-lg shadow-md">
         <h3 className="text-lg font-semibold mb-2">Courses Calendar</h3>
         <div className="grid grid-cols-1 gap-4">
           {userData.courses.map(course => (
@@ -65,7 +63,7 @@ const ProfileCard = () => {
                 </div>
               </div>
               <div className="flex items-center text-primary">
-                <FontAwesomeIcon icon={faCalendarAlt} className="mr-2" />
+                <FontAwesomeIcon icon={faCalendarAlt} className="h-3 mr-2" />
                 <span>{formatDate(course.date)}</span>
               </div>
             </div>
