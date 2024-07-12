@@ -46,7 +46,7 @@ const Page = () => {
               </div>
             </div>
             <div className="mt-6">
-              <button className="inline-flex items-center px-10 py-2 bg-primary text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 font-medium mt-6 transition-all duration-300 ease-in-out transform hover:scale-105 hover:translate-x-1 animate-bounce">
+              <button className="inline-flex items-center px-10 py-2 bg-[#171a29] text-white rounded-md  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 font-medium mt-6 transition-all duration-300 ease-in-out transform hover:scale-105 hover:translate-x-1 animate-bounce">
                 Explore
               </button>
             </div>
@@ -56,27 +56,28 @@ const Page = () => {
       case "classes":
         return (
           <div className="bg-white rounded-lg  text-[#171a29]">
-      <h2 className="text-2xl font-bold mb-4 text-primary">My Courses</h2>
-
-            <MyCourses/>
+            <h2 className="text-2xl font-bold mb-4 text-primary">My Courses</h2>
+            <MyCourses />
           </div>
         );
       case "savedClasses":
         return (
           <div className="bg-white p-8 rounded-lg mb-8 text-[#171a29]">
+            {/* Add your saved classes content here */}
           </div>
         );
       case "help":
         return (
           <div className="bg-white p-8 rounded-lg mb-8 text-[#171a29]">
-            <HelpSection/>
+            <HelpSection />
           </div>
         );
       case "settings":
         return (
-          <div className="bg-white p-8 rounded-lg mb-8 text-[#171a29]">
-            <h2 className="text-4xl font-bold mb-4">Settings</h2>
-            <Settings/>
+          <div className="bg-white p-8 rounded-lg mb-8  text-[#171a29]">
+        <h2 className="text-3xl font-bold mb-6 text-center text-[#171a29]">Account Settings</h2>
+
+            <Settings />
           </div>
         );
       default:
@@ -155,7 +156,6 @@ const Page = () => {
                     <FontAwesomeIcon icon={faBookmark} className="h-7" />
                   </span>
                   <span className="title">Saved Classes</span>
-                  
                 </a>
               </li>
               <li className="relative w-full">
@@ -200,40 +200,6 @@ const Page = () => {
 
       {/* Main Content */}
       <div className={`flex-1 p-8 ml-${active ? "64" : "20"}`}>
-<<<<<<< HEAD
-        <div className="bg-white p-8 rounded-lg  mb-8 text-[#171a29] ">
-          <div className="flex items-center space-x-4">
-            <div className="flex-2">
-              <h2 className="text-4xl font-bold">
-                Welcome to <span className="text-primary font-bold">Eduquest</span>, Yosr!
-              </h2>
-              <p className="mt-2 text-lg font-semibold text-[#171a29]">
-                We’re excited to have you here. Dive into your{" "}
-                <span className="text-primary">courses</span>, explore new{" "}
-                <span className="text-primary">projects</span>, and join our{" "}
-                <span className="text-primary">live sessions</span>. Remember,
-                every step you take is a step closer to mastering new{" "}
-                <span className="text-primary">skills</span>. Let's get started!
-              </p>
-            </div>
-          </div>
-          <div className="mt-6">
-            <button className="inline-flex items-center px-10 py-2 bg-primary text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 font-medium mt-6 transition-all duration-300 ease-in-out transform hover:scale-105 hover:translate-x-1 animate-bounce">
-              Explore
-            </button>
-          </div>
-        </div>
-         <TopCourses active={active}/>
-
-          
-      </div>
-
-      {/* Profile Card Section */}
-      <div className=" flex-basis p-4 ml-8 bg-gray-200 rounded-lg shadow-md h-full  mt-9 mr-2">
-         <ProfileCard  />
-      </div>
-      
-=======
         {renderContent()}
       </div>
 
@@ -243,7 +209,6 @@ const Page = () => {
           <ProfileCard />
         </div>
       )}
->>>>>>> cb75ec67dc4b306d04fabd77230eff7dfa02c8c3
     </div>
   );
 };
