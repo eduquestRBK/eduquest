@@ -6,6 +6,7 @@ import { faUpload, faBook, faClipboard, faTag } from '@fortawesome/free-solid-sv
 import axios from 'axios'
 
 const AddCorse = (props: { active: boolean }) => {
+  
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
@@ -13,6 +14,8 @@ const AddCorse = (props: { active: boolean }) => {
   const [note, setNote] = useState('');
   const [image, setImage] = useState('');
   const [imageUrl,setImageUrl]=useState('')
+ 
+  console.log(props.userInfo);
   
   const uploadImage = async () => {
     const form = new FormData();
@@ -50,7 +53,8 @@ const AddCorse = (props: { active: boolean }) => {
           category,
           content,
           note,
-          image:url
+          image:url,   
+          instructorId:props.userInfo
         })
         if(result.status===201){
           console.log('course created successfuly');

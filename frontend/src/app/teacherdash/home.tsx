@@ -4,9 +4,15 @@ import NewStdIcon from '../../image/newst.png'
 import CoursesIcon from '../../image/online-learning.png'
 import ProfileCard from '../studentdash/ProfileCard'
 
-
-const page = (props: { active: boolean }) => {
-    
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  phone: string;
+  gender: string;
+  role: string;
+}
+const page = (props: { active: boolean , userInfo:User}) => {
       
   return (
     <div className="">
@@ -16,7 +22,7 @@ const page = (props: { active: boolean }) => {
           <div className="flex items-center space-x-4">
             <div className="flex-2 w-2/3 mt-10">
               <h2 className="text-4xl font-bold">
-                Welcome to <span className="text-primary font-bold">Eduquest</span>, Username! 👋
+                Welcome to <span className="text-primary font-bold">Eduquest</span>, {props.userInfo.name}! 👋
               </h2>
               <p className="mt-2  text-lg font-semibold text-[#171a29]">
                 We’re excited to have you here. Dive into your{" "}

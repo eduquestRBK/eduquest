@@ -32,7 +32,7 @@ export default function SignIn() {
 
       if (response.status === 200 && decodedToken.user.role === 'instructor') {
         console.log("Login successful");
-        router.push('./teacherdash')
+        router.push(`/teacherdash`)
       }else if (response.status === 200 && decodedToken.user.role === 'student') {
         console.log("Login successful");
         router.push('./studentdash')
