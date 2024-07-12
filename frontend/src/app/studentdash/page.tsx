@@ -46,7 +46,7 @@ const Page = () => {
               </div>
             </div>
             <div className="mt-6">
-              <button className="inline-flex items-center px-10 py-2 bg-primary text-white rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 font-medium mt-6 transition-all duration-300 ease-in-out transform hover:scale-105 hover:translate-x-1 animate-bounce">
+              <button className="inline-flex items-center px-10 py-2 bg-[#171a29] text-white rounded-md  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 font-medium mt-6 transition-all duration-300 ease-in-out transform hover:scale-105 hover:translate-x-1 animate-bounce">
                 Explore
               </button>
             </div>
@@ -56,27 +56,28 @@ const Page = () => {
       case "classes":
         return (
           <div className="bg-white rounded-lg  text-[#171a29]">
-      <h2 className="text-2xl font-bold mb-4 text-primary">My Courses</h2>
-
-            <MyCourses/>
+            <h2 className="text-2xl font-bold mb-4 text-[#171a29] text-center">My Courses</h2>
+            <MyCourses />
           </div>
         );
       case "savedClasses":
         return (
           <div className="bg-white p-8 rounded-lg mb-8 text-[#171a29]">
+            {/* Add your saved classes content here */}
           </div>
         );
       case "help":
         return (
           <div className="bg-white p-8 rounded-lg mb-8 text-[#171a29]">
-            <HelpSection/>
+            <HelpSection />
           </div>
         );
       case "settings":
         return (
-          <div className="bg-white p-8 rounded-lg mb-8 text-[#171a29]">
-            <h2 className="text-4xl font-bold mb-4">Settings</h2>
-            <Settings/>
+          <div className="bg-white p-8 rounded-lg mb-8  text-[#171a29]">
+        <h2 className="text-3xl font-bold mb-6 text-center text-[#171a29]">Account Settings</h2>
+
+            <Settings />
           </div>
         );
       default:
@@ -155,7 +156,6 @@ const Page = () => {
                     <FontAwesomeIcon icon={faBookmark} className="h-7" />
                   </span>
                   <span className="title">Saved Classes</span>
-                  
                 </a>
               </li>
               <li className="relative w-full">

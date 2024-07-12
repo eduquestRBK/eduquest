@@ -42,7 +42,7 @@ const MyCourses = () => {
     <div className="bg-white p-8 rounded-lg mb-8">
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white border-gray-300 shadow-md rounded-lg overflow-hidden">
-          <thead className=" bg-primary">
+          <thead className=" bg-[#171a29]">
             <tr>
               <th className="py-3 px-4 text-center text-white">ID</th>
               <th className="py-3 px-4 text-center text-white">Course Title</th>
