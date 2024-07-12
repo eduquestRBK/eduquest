@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalculator, faUser, faStar, faMoneyBill, faBriefcase, faFlask, faGlobe, faPalette } from '@fortawesome/free-solid-svg-icons';
+import { faCode, faBook, faUser, faStar } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
 import image1 from '../../image/allcourses-bg.jpg';
 
@@ -14,6 +14,10 @@ const TopCourses = () => {
       students: 1289,
       category: "Web Development",
       description: "Learn the basics of web development including HTML, CSS, and JavaScript.",
+      reviews: [
+        { id: 1, user: "John Smith", comment: "Great course, very informative!" },
+        { id: 2, user: "Alice Johnson", comment: "Enjoyed the hands-on projects." }
+      ],
       image: image1
     },
     {
@@ -24,72 +28,45 @@ const TopCourses = () => {
       students: 987,
       category: "Web Development",
       description: "Master advanced JavaScript concepts like closures, async/await, and more.",
+      reviews: [
+        { id: 1, user: "Mary Brown", comment: "Excellent course, highly recommended!" },
+        { id: 2, user: "David White", comment: "Challenging but rewarding." }
+      ],
       image: image1
     },
     {
       id: 3,
-      title: "Math Fundamentals",
-      instructor: "Michael Johnson",
-      rating: 4.3,
-      students: 760,
-      category: "Math",
-      description: "Master the fundamental concepts of mathematics.",
+      title: "Introduction to Machine Learning",
+      instructor: "Alex Green",
+      rating: 4.7,
+      students: 1100,
+      category: "Data Science",
+      description: "Get started with machine learning algorithms and applications.",
+      reviews: [
+        { id: 1, user: "Emma Lee", comment: "Very insightful course!" },
+        { id: 2, user: "Michael Brown", comment: "Clear explanations and practical examples." }
+      ],
       image: image1
     },
     {
       id: 4,
-      title: "Introduction to Economics",
-      instructor: "Emily Green",
-      rating: 4.6,
-      students: 890,
-      category: "Economy",
-      description: "Understand basic economic principles and theories.",
-      image: image1
-    },
-    {
-      id: 5,
-      title: "Management Skills",
-      instructor: "Oliver Black",
-      rating: 4.7,
-      students: 1023,
-      category: "Management",
-      description: "Develop essential management skills for leadership roles.",
-      image: image1
-    },
-    {
-      id: 6,
-      title: "Introduction to Science",
+      title: "Mastering Python",
       instructor: "Sarah White",
-      rating: 4.4,
-      students: 832,
-      category: "Science",
-      description: "Explore the basics of various scientific disciplines.",
-      image: image1
-    },
-    {
-      id: 7,
-      title: "History & Geography",
-      instructor: "Lucas Moore",
       rating: 4.9,
-      students: 1134,
-      category: "History&Geography",
-      description: "Discover historical events and geographical features.",
-      image: image1
-    },
-    {
-      id: 8,
-      title: "Art & Literature",
-      instructor: "Sophie Gray",
-      rating: 4.8,
-      students: 998,
-      category: "Art&Literature",
-      description: "Explore artistic and literary works from different periods.",
+      students: 1500,
+      category: "Programming",
+      description: "Become proficient in Python programming language from basics to advanced topics.",
+      reviews: [
+        { id: 1, user: "Adam Black", comment: "Best Python course I've taken!" },
+        { id: 2, user: "Olivia Green", comment: "Great course, highly recommend for beginners." }
+      ],
       image: image1
     }
   ];
 
   const [activeTab, setActiveTab] = useState("All");
 
+  // Extracting unique categories from courses
   const categories = Array.from(new Set(courses.map(course => course.category)));
 
   const handleTabClick = (category) => {
@@ -104,34 +81,22 @@ const TopCourses = () => {
     <div className="px-4 py-6">
       <h2 className="text-3xl font-bold mb-6 text-black">Top Courses</h2>
       <div className="flex justify-start mb-4 space-x-2">
-        {['All', ...categories].map(category => (
+        {categories.map(category => (
           <button
             key={category}
             className={`py-2 px-4 rounded-lg font-semibold flex items-center focus:outline-none ${activeTab === category ? 'bg-primary text-white' : 'bg-gray-200 text-gray-600'}`}
             onClick={() => handleTabClick(category)}
           >
-            {category === "All" && (
-              <FontAwesomeIcon icon={faCalculator} className="mr-2 h-3" />
+            {category === "Web Development" && (
+              <FontAwesomeIcon icon={faCode} className="mr-2 h-4" />
             )}
-            {category === "Math" && (
-              <FontAwesomeIcon icon={faCalculator} className="mr-2 h-3" />
+            {category === "Data Science" && (
+              <FontAwesomeIcon icon={faBook} className="mr-2 h-4" />
             )}
-            {category === "Economy" && (
-              <FontAwesomeIcon icon={faMoneyBill} className="mr-2 h-3" />
+            {category !== "Web Development" && category !== "Data Science" && (
+              <FontAwesomeIcon icon={faStar} className="mr-2 h-4" />
             )}
-            {category === "Management" && (
-              <FontAwesomeIcon icon={faBriefcase} className="mr-2 h-3" />
-            )}
-            {category === "Science" && (
-              <FontAwesomeIcon icon={faFlask} className="mr-2 h-3" />
-            )}
-            {category === "History&Geography" && (
-              <FontAwesomeIcon icon={faGlobe} className="mr-2 h-3" />
-            )}
-            {category === "Art&Literature" && (
-              <FontAwesomeIcon icon={faPalette} className="mr-2 h-3" />
-            )}
-            {category === "All" ? 'All' : category}
+            {category}
           </button>
         ))}
       </div>
@@ -143,10 +108,10 @@ const TopCourses = () => {
             </div>
             <h3 className="text-lg font-semibold mb-2">{course.title}</h3>
             <div className="flex items-center text-gray-500 mb-2">
-              <FontAwesomeIcon icon={faUser} className="mr-2" style={{ fontSize: '0.9rem' }} />
+              <FontAwesomeIcon icon={faUser} className="mr-2" />
               <span>{course.instructor}</span>
               <div className="flex items-center ml-4">
-                <FontAwesomeIcon icon={faStar} className="text-yellow-500 mr-1" style={{ fontSize: '0.9rem' }} />
+                <FontAwesomeIcon icon={faStar} className="text-yellow-500 mr-1" />
                 <span>{course.rating.toFixed(1)}</span>
               </div>
             </div>
