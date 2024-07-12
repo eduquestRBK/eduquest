@@ -7,6 +7,8 @@ import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 import {faArrowRightFromBracket} from '@fortawesome/free-solid-svg-icons'
+import {faFile} from '@fortawesome/free-solid-svg-icons'
+
 import { useState } from 'react'
 import Logo from '../../image/dash-logo.png'
 import WhiteLogo from '../../image/white-logo.png'
@@ -43,6 +45,14 @@ const page = () => {
                         <FontAwesomeIcon icon={faHouseUser} className='h-7' />
                         </span>
                         <span className="title">Dashboard</span>
+                    </Link>
+                </li>
+                <li className="relative w-full" onClick={()=>setNavigation('allcorses')}>
+                    <Link href="" className="relative block w-full text-[#fff]">
+                        <span className="icon relative">
+                        <FontAwesomeIcon icon={faFile} className='h-7' />
+                        </span>
+                        <span className="title">All courses</span>
                     </Link>
                 </li>
 

@@ -3,16 +3,31 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload, faBook, faClipboard, faTag } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios'
 
 const AddCorse = (props: { active: boolean }) => {
-
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
   const [content, setContent] = useState('');
   const [note, setNote] = useState('');
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState('');
+  const [imageUrl,setImageUrl]=useState('')
   
+  const uploadImage = async () => {
+    const form = new FormData();
+    form.append('file', image);
+    form.append('upload_preset', 'chila-bila');
+
+    try {
+      const res = await axios.post('https://api.cloudinary.com/v1_1/dh3m2vb3x/upload', form);      
+      setImageUrl(res.data.url);
+      return res.data.url; // Return the URL for further chaining
+    } catch (err) {
+      console.log(err);
+      return null; // Return null if there was an error
+    }
+  };
 
   const handleImageUpload = (e: React.FormEvent<HTMLInputElement>) => {
     if (e.target && (e.target as HTMLInputElement).files) {
@@ -23,8 +38,30 @@ const AddCorse = (props: { active: boolean }) => {
   const handleSubmit = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
     // Handle form submission logic
-    console.log({ title, description, category, content, note, image });
+    console.log({ title, description, category, content, note, imageUrl });
   };
+  async function handelCreat(){
+    const url = await uploadImage()
+    if(url){
+        try {
+        const result=await axios.post('http://127.0.0.1:5000/api/course/createCourse',{
+          title,
+          description,
+          category,
+          content,
+          note,
+          image:url
+        })
+        if(result.status===201){
+          console.log('course created successfuly');
+        }else{
+          console.log('creation course failed')
+        }
+        } catch (error) {
+          console.log(error);
+    }
+  }
+}
 
   return (
     <div>
@@ -112,9 +149,9 @@ const AddCorse = (props: { active: boolean }) => {
           </div>
           <div className="mt-6 text-center">
             <button
-              type="submit"
               className="bg-[#171a29] ml-10 rounded-lg text-white font-semibold py-2 px-4 transition duration-300"
-            >
+              onClick={()=>{uploadImage(),handelCreat()}}
+           > 
               Add Course
             </button>
           </div>
