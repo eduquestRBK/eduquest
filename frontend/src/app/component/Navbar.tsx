@@ -26,11 +26,7 @@ const Navbar = () => {
                   Learn
                 </span>
               </Link>
-              <Link href="/teach">
-                <span className="text-gray-600 hover:text-primary px-3 py-2 rounded-md text-sm font-medium cursor-pointer">
-                  Teach
-                </span>
-              </Link>
+             
               <Link href="/about">
                 <span className="text-gray-600 hover:text-primary px-3 py-2 rounded-md text-sm font-medium cursor-pointer">
                   About us
