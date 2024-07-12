@@ -88,17 +88,18 @@ const deleteCourse = async (req, res) => {
 
 
 const UpdateCourse = async (req, res) => {
-    const { instructorId, courseId } = req.params;
+    const {  courseId } = req.params;
     const updateData = req.body;
 
     try {
         const course = await Course.findOne({
             where: {
-                id: courseId,
-                instructorId: instructorId
+                id: courseId
+                // instructorId: instructorId
             }
         });
         if (!course) {
+            console.log(courseId);
             return res.status(404).json({ message: 'Course not found' });
         }
 
