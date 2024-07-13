@@ -92,10 +92,34 @@ const getEnrolledCourses = async (req, res) => {
   }
 };
 
+// Controller function to delete a student account
+const deleteAccount = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const student = await Student.findByPk(id);
+    if (!student) {
+      return res.status(404).json({ message: 'Student not found' });
+    }
+
+    // If the student has a profile image, delete it from Cloudinary
+    if (student.image) {
+      const publicId = student.image.split('/').pop().split('.')[0];
+      await cloudinary.uploader.destroy(publicId);
+    }
+
+    await student.destroy();
+    res.status(200).json({ message: 'Account deleted successfully' });
+  } catch (error) {
+    console.error('Error deleting account:', error);
+    res.status(500).json({ message: 'Failed to delete account' });
+  }
+};
 module.exports = {
   getAllStudents,
   createStudent,
   uploadProfileImage,
   getStudentById,
   getEnrolledCourses,
+  deleteAccount
 };

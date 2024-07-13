@@ -85,9 +85,35 @@ const getEnrollmentRequestsByCourse = async (req, res) => {
     console.error('Error fetching enrollment requests:', error);
     return res.status(500).json({ error: 'Internal server error' });
   }
+}
+
+const getEnrollmentRequestsByStudent = async (req, res) => {
+  const { studentId } = req.params;
+
+  try {
+    const enrollmentRequests = await EnrollmentRequest.findAll({
+      where: {
+        studentId,
+        status: ['pending', 'accepted', 'rejected'], // Include all statuses you want to fetch
+      },
+      include: [
+        {
+          model: Course,
+          attributes: ['id', 'title', 'description', 'category', 'image'], // Adjust attributes as per your needs
+        },
+      ],
+    });
+
+    return res.status(200).json(enrollmentRequests);
+  } catch (error) {
+    console.error('Error fetching enrollment requests by student:', error);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
 };
 
+
 module.exports = {
+  getEnrollmentRequestsByStudent,
   createEnrollmentRequest,
   acceptEnrollmentRequest,
   rejectEnrollmentRequest,

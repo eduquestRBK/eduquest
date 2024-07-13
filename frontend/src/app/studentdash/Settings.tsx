@@ -1,7 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
 import {
   faTrashAlt,
   faCamera,
@@ -21,6 +23,20 @@ const Settings = () => {
     phoneNumber: "",
   });
 
+  useEffect(() => {
+    // Fetch user data from backend and set it to formData
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get("http://127.0.0.1:5000/api/user/1"); // Replace with your user ID endpoint
+        setFormData(response.data);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -29,26 +45,47 @@ const Settings = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission logic
-    console.log("Form data submitted:", formData);
+    try {
+      const formDataCopy = { ...formData };
+      if (formData.profileImage instanceof File) {
+        const imageData = new FormData();
+        imageData.append("profileImage", formData.profileImage);
+        const imageResponse = await axios.post("http://127.0.0.1:5000/api/upload", imageData);
+        formDataCopy.profileImage = imageResponse.data.filePath;
+      }
+      const response = await axios.put("http://127.0.0.1:5000/api/user/1", formDataCopy); 
+      console.log("Form data submitted:", response.data);
+    } catch (error) {
+      console.error("Error updating user data:", error);
+    }
   };
 
-  const handleDeleteAccount = () => {
-    // Handle account deletion logic
-    console.log("Account deletion requested");
+  const handleDeleteAccount = async () => {
+    
+    try {
+      await axios.delete("http://127.0.0.1:5000/api/student/deleteAccount");
+      console.log("Account deletion requested");
+    } catch (error) {
+      console.error("Error deleting account:", error);
+    }
   };
 
   return (
-    <div className="min-h-screen p-8 flex justify-center ">
+    <div className="min-h-screen p-8 flex justify-center">
       <div className="p-6 w-full max-w-2xl">
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="flex items-center space-x-4 mb-6 justify-center">
             <div className="relative w-16 h-16">
               {formData.profileImage ? (
                 <img
-                  src={URL.createObjectURL(formData.profileImage)}
+                  src={
+                    formData.profileImage instanceof File
+                      ? URL.createObjectURL(formData.profileImage)
+                      : formData.profileImage
+                  }
                   alt="Profile"
                   className="w-full h-full rounded-full object-cover"
                 />
@@ -60,19 +97,26 @@ const Settings = () => {
               <input
                 type="file"
                 name="profileImage"
-                onChange={(e) => setFormData({ ...formData, profileImage: e.target.files[0] })}
+                onChange={(e) =>
+                  setFormData({ ...formData, profileImage: e.target.files[0] })
+                }
                 className="absolute inset-0 opacity-0 cursor-pointer"
               />
             </div>
             <div className="flex flex-col">
-              <label className="block text-gray-700 font-semibold">Profile Image</label>
+              <label className="block text-gray-700 font-semibold">
+                Profile Image
+              </label>
             </div>
           </div>
           <div className="flex space-x-4">
             <div className="flex-1">
               <label className="block text-gray-700">Name</label>
               <div className="flex items-center border rounded-md px-3 py-2">
-                <FontAwesomeIcon icon={faUser} className="text-gray-400 mr-3" />
+                <FontAwesomeIcon
+                  icon={faUser}
+                  className="text-gray-400 mr-3"
+                />
                 <input
                   type="text"
                   name="name"
@@ -85,7 +129,10 @@ const Settings = () => {
             <div className="flex-1">
               <label className="block text-gray-700">Username</label>
               <div className="flex items-center border rounded-md px-3 py-2">
-                <FontAwesomeIcon icon={faUser} className="text-gray-400 mr-3" />
+                <FontAwesomeIcon
+                  icon={faUser}
+                  className="text-gray-400 mr-3"
+                />
                 <input
                   type="text"
                   name="username"
@@ -99,7 +146,10 @@ const Settings = () => {
           <div>
             <label className="block text-gray-700">Email</label>
             <div className="flex items-center border rounded-md px-3 py-2">
-              <FontAwesomeIcon icon={faEnvelope} className="text-gray-400 mr-3" />
+              <FontAwesomeIcon
+                icon={faEnvelope}
+                className="text-gray-400 mr-3"
+              />
               <input
                 type="email"
                 name="email"
@@ -112,7 +162,10 @@ const Settings = () => {
           <div>
             <label className="block text-gray-700">Password</label>
             <div className="flex items-center border rounded-md px-3 py-2">
-              <FontAwesomeIcon icon={faLock} className="text-gray-400 mr-3" />
+              <FontAwesomeIcon
+                icon={faLock}
+                className="text-gray-400 mr-3"
+              />
               <input
                 type="password"
                 name="password"
@@ -125,7 +178,10 @@ const Settings = () => {
           <div>
             <label className="block text-gray-700">Phone Number</label>
             <div className="flex items-center border rounded-md px-3 py-2">
-              <FontAwesomeIcon icon={faPhone} className="text-gray-400 mr-3" />
+              <FontAwesomeIcon
+                icon={faPhone}
+                className="text-gray-400 mr-3"
+              />
               <input
                 type="text"
                 name="phoneNumber"
@@ -142,13 +198,10 @@ const Settings = () => {
             Save Changes
           </button>
         </form>
-        <button
-          onClick={handleDeleteAccount}
-          className="w-full py-2 px-4 bg-[#171a29] text-white rounded-md  transition duration-200 flex items-center justify-center mt-6"
-        >
-          <FontAwesomeIcon icon={faTrashAlt} className="h-5 mr-2" />
-          Delete Account
-        </button>
+        <Link href="/" className="w-full py-2 px-4 bg-[#171a29] text-white rounded-md transition duration-200 flex items-center justify-center mt-6">
+        <FontAwesomeIcon icon={faTrashAlt} className="h-5 mr-2" onClick={handleDeleteAccount} />
+        
+        Delete Account </Link>
       </div>
     </div>
   );
