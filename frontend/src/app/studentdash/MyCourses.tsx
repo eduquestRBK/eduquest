@@ -1,4 +1,7 @@
-import React, { useState, useEffect } from "react";
+"use client "
+
+
+import  { useState, useEffect } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,15 +12,24 @@ import {
   faCircleXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
-const MyCourses = () => {
-  const [courses, setCourses] = useState([]);
+interface Course {
+  id: number;
+  status: string;
+  details: {
+    title: string;
+    category: string;
+  };
+}
+
+const MyCourses: React.FC = () => {
+  const [courses, setCourses] = useState<Course[]>([]);
 
   useEffect(() => {
     const fetchCourses = async () => {
       try {
         const response = await axios.get("http://127.0.0.1:5000/api/enrollment/student/1");
-        setCourses(response.data);  // Extract courses from response data
-        console.log(response.data);  // Log the courses to see the structure
+        setCourses(response.data); // Extract courses from response data
+        console.log(response.data); // Log the courses to see the structure
       } catch (error) {
         console.error("Error fetching courses:", error);
       }
@@ -26,7 +38,7 @@ const MyCourses = () => {
     fetchCourses();
   }, []);
 
-  const getStatusColor = (status) => {
+  const getStatusColor = (status: string): string => {
     switch (status) {
       case "pending":
         return "text-yellow-600";
@@ -53,7 +65,7 @@ const MyCourses = () => {
           </thead>
           <tbody>
             {courses && courses.map((elm) => {
-              const details =Object.values(elm)
+              const details = Object.values(elm);
               console.log(details[6].category);
 
               return (

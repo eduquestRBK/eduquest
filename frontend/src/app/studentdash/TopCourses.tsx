@@ -1,11 +1,21 @@
+"use client"
+
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
 
-const TopCourses = () => {
-  const [courses, setCourses] = useState([]);
+interface Course {
+  id: number;
+  title: string;
+  category: string;
+  description: string;
+  image: string;
+}
+
+const TopCourses: React.FC = () => {
+  const [courses, setCourses] = useState<Course[]>([]);
   const [showAll, setShowAll] = useState(false);
-  const initialCourses = 3; 
+  const initialCourses = 3;
 
   useEffect(() => {
     fetchCourses();
@@ -13,13 +23,10 @@ const TopCourses = () => {
 
   const fetchCourses = async () => {
     try {
-      const response = await axios.get('http://127.0.0.1:5000/api/course/getAllCourses'); 
-      setCourses(response.data); 
-      //console.log(response.data); 
-
+      const response = await axios.get('http://127.0.0.1:5000/api/course/getAllCourses');
+      setCourses(response.data);
     } catch (error) {
       console.error('Error fetching courses:', error);
-      // Handle error state if needed
     }
   };
 
@@ -69,7 +76,7 @@ const TopCourses = () => {
       {showAll && (
         <div className="mt-4">
           <button
-            className="bg-gray-200 text-gray-600 font-semibold py-2 px-4 rounded-md hover:bg-gray-300 focus:outline-none "
+            className="bg-gray-200 text-gray-600 font-semibold py-2 px-4 rounded-md hover:bg-gray-300 focus:outline-none"
             onClick={handleSeeLess}
           >
             See Less
@@ -78,6 +85,6 @@ const TopCourses = () => {
       )}
     </div>
   );
-}
+};
 
 export default TopCourses;

@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
+import jwtDecode from "jwt-decode"; // Import jwt-decode library
 import {
   faTrashAlt,
   faCamera,
@@ -13,8 +14,22 @@ import {
   faPhone,
 } from "@fortawesome/free-solid-svg-icons";
 
-const Settings = () => {
-  const [formData, setFormData] = useState({
+interface FormData {
+  profileImage: string | File;
+  name: string;
+  username: string;
+  email: string;
+  password: string;
+  phoneNumber: string;
+}
+
+const Settings: React.FC = () => {
+  const token =localStorage.getItem('token')
+  const userInfo = jwtDecode(token)
+  setUser(userInfo.user)// Decode the JWT token
+  const [user, setUser] = useState<any>(userInfo.user); // Set user state with decoded user data
+
+  const [formData, setFormData] = useState<FormData>({
     profileImage: "",
     name: "",
     username: "",
@@ -24,10 +39,9 @@ const Settings = () => {
   });
 
   useEffect(() => {
-    // Fetch user data from backend and set it to formData
     const fetchUserData = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:5000/api/user/1"); // Replace with your user ID endpoint
+        const response = await axios.get("http://127.0.0.1:5000/api/user/1"); 
         setFormData(response.data);
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -37,15 +51,15 @@ const Settings = () => {
     fetchUserData();
   }, []);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value, files } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: files ? files[0] : value,
+    }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     // Handle form submission logic
     try {
@@ -64,7 +78,6 @@ const Settings = () => {
   };
 
   const handleDeleteAccount = async () => {
-    
     try {
       await axios.delete("http://127.0.0.1:5000/api/student/deleteAccount");
       console.log("Account deletion requested");
@@ -97,9 +110,7 @@ const Settings = () => {
               <input
                 type="file"
                 name="profileImage"
-                onChange={(e) =>
-                  setFormData({ ...formData, profileImage: e.target.files[0] })
-                }
+                onChange={handleChange}
                 className="absolute inset-0 opacity-0 cursor-pointer"
               />
             </div>
@@ -113,10 +124,7 @@ const Settings = () => {
             <div className="flex-1">
               <label className="block text-gray-700">Name</label>
               <div className="flex items-center border rounded-md px-3 py-2">
-                <FontAwesomeIcon
-                  icon={faUser}
-                  className="text-gray-400 mr-3"
-                />
+                <FontAwesomeIcon icon={faUser} className="text-gray-400 mr-3" />
                 <input
                   type="text"
                   name="name"
@@ -129,10 +137,7 @@ const Settings = () => {
             <div className="flex-1">
               <label className="block text-gray-700">Username</label>
               <div className="flex items-center border rounded-md px-3 py-2">
-                <FontAwesomeIcon
-                  icon={faUser}
-                  className="text-gray-400 mr-3"
-                />
+                <FontAwesomeIcon icon={faUser} className="text-gray-400 mr-3" />
                 <input
                   type="text"
                   name="username"
@@ -162,10 +167,7 @@ const Settings = () => {
           <div>
             <label className="block text-gray-700">Password</label>
             <div className="flex items-center border rounded-md px-3 py-2">
-              <FontAwesomeIcon
-                icon={faLock}
-                className="text-gray-400 mr-3"
-              />
+              <FontAwesomeIcon icon={faLock} className="text-gray-400 mr-3" />
               <input
                 type="password"
                 name="password"
@@ -178,10 +180,7 @@ const Settings = () => {
           <div>
             <label className="block text-gray-700">Phone Number</label>
             <div className="flex items-center border rounded-md px-3 py-2">
-              <FontAwesomeIcon
-                icon={faPhone}
-                className="text-gray-400 mr-3"
-              />
+              <FontAwesomeIcon icon={faPhone} className="text-gray-400 mr-3" />
               <input
                 type="text"
                 name="phoneNumber"
@@ -199,9 +198,9 @@ const Settings = () => {
           </button>
         </form>
         <Link href="/" className="w-full py-2 px-4 bg-[#171a29] text-white rounded-md transition duration-200 flex items-center justify-center mt-6">
-        <FontAwesomeIcon icon={faTrashAlt} className="h-5 mr-2" onClick={handleDeleteAccount} />
-        
-        Delete Account </Link>
+          <FontAwesomeIcon icon={faTrashAlt} className="h-5 mr-2" onClick={handleDeleteAccount} />
+          Delete Account
+        </Link>
       </div>
     </div>
   );
