@@ -7,12 +7,19 @@ import {
   faComments,
   faEnvelope,
   faPhoneAlt,
+  faChevronUp,
+  faChevronDown,
 } from "@fortawesome/free-solid-svg-icons";
 
-const Help = () => {
-  const [expandedIndex, setExpandedIndex] = useState(null);
+interface Question {
+  question: string;
+  answer: string;
+}
 
-  const handleToggle = (index) => {
+const Help: React.FC = () => {
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+
+  const handleToggle = (index: number) => {
     if (expandedIndex === index) {
       setExpandedIndex(null);
     } else {
@@ -20,13 +27,12 @@ const Help = () => {
     }
   };
 
-  const questions = [
+  const questions: Question[] = [
     {
       question: "How do I update my profile?",
       answer:
-        "To reset your password, go to the setting page and click update tour profile there. ",
+        "To reset your password, go to the setting page and click update your profile there.",
     },
-  
     {
       question: "Can I cancel my subscription?",
       answer:
@@ -40,7 +46,7 @@ const Help = () => {
   ];
 
   return (
-    <div className="min-h-screen  p-8">
+    <div className="min-h-screen p-8">
       <h2 className="text-3xl font-bold mb-6 text-center">Help & Support</h2>
 
       <div className="max-w-3xl mx-auto">
@@ -64,13 +70,13 @@ const Help = () => {
                   <h4 className="text-lg font-semibold">{item.question}</h4>
                 </div>
                 <FontAwesomeIcon
-                  icon={expandedIndex === index ? "chevron-up" : "chevron-down"}
+                  icon={expandedIndex === index ? faChevronUp : faChevronDown}
                   className="text-gray-400"
                 />
               </button>
               {expandedIndex === index && (
                 <div className="p-4 bg-gray-100">
-                  <p className="text-gray-600  font-semibold">{item.answer}</p>
+                  <p className="text-gray-600 font-semibold">{item.answer}</p>
                 </div>
               )}
             </div>
@@ -82,7 +88,6 @@ const Help = () => {
           <h3 className="text-xl font-bold mb-4">Contact Support</h3>
           <div className="bg-white rounded-lg shadow-md p-6">
             <div className="flex items-center mb-4">
-             
               <h4 className="text-lg font-semibold">Email Support</h4>
             </div>
             <p className="text-gray-600 mb-4 font-semibold">
@@ -90,13 +95,15 @@ const Help = () => {
               via email.
             </p>
             <div className="flex items-center">
-              <FontAwesomeIcon icon={faEnvelope} className="text-[#171a29] mr-2" />
+              <FontAwesomeIcon
+                icon={faEnvelope}
+                className="text-[#171a29] mr-2"
+              />
               <span className="text-gray">support@Eduquest.com</span>
             </div>
           </div>
           <div className="bg-white rounded-lg shadow-md p-6 mt-4">
             <div className="flex items-center mb-4">
-          
               <h4 className="text-lg font-semibold">Phone Support</h4>
             </div>
             <p className="text-gray-600 mb-4">
@@ -104,7 +111,10 @@ const Help = () => {
               hours.
             </p>
             <div className="flex items-center">
-              <FontAwesomeIcon icon={faPhoneAlt} className="text-[#171a29] mr-2" />
+              <FontAwesomeIcon
+                icon={faPhoneAlt}
+                className="text-[#171a29] mr-2"
+              />
               <span className="text-gray">+216 99 855 238</span>
             </div>
           </div>
